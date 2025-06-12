@@ -1,0 +1,12 @@
+/* Home Page Specific Styles */
+.hero-section {
+    background-image: url('images/wei-nk2W2H_kiH0-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+}
+/* Swiper slide styling for home page */
+#home-page-section .swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    padding: 0 0.5rem;
+}

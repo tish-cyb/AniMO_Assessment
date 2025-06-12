@@ -1,0 +1,33 @@
+/* Loan Page Specific Styles */
+    .apply-loan-bg {
+        /* Lighter green background for the "Apply for a Loan" section */
+        background-image: url('images/loan.jpg'); /* Updated placeholder to the new darker green */
+        background-size: cover;
+        background-position: center;
+    }
+    .loan-balance-bg {
+        /* Changed to the specified "dark green but not too dark" for the "Loan Balance" section background */
+        background-color: #115213;
+    }
+    .payment-tracker-bar {
+        background-color: #E0E0E0; /* Light grey for unpaid part */
+        height: 10px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .payment-tracker-fill {
+        /* Consistently using the darker green for the paid part of the progress bar */
+        background-color: #39523a; /* Slightly darker shade for better contrast with #4CAF50 if needed */
+        height: 100%;
+        width: 40%; /* Example: 20,000 / 50,000 = 40% */
+    }
+    /* Styles for the bar graph elements */
+    .graph-bar {
+        width: 24px; /* Fixed width for consistency, equivalent to w-6 */
+        border-radius: 0.25rem 0.25rem 0 0; /* Rounded top edges, square bottom */
+        display: flex;
+        align-items: flex-end; /* Align bars to the bottom */
+        justify-content: center;
+        transition: height 0.3s ease-in-out; /* Smooth transition for height changes */
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* subtle shadow */
+    }

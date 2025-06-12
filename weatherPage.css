@@ -1,0 +1,25 @@
+/* Weather Page Specific Styles */
+.weather-banner {
+    background-image: url('images/plant-4803128_1920.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.weather-card-gradient {
+    background: linear-gradient(to right, #61A356, #8CC63F);
+}
+/* Specific styling for the weather types swiper */
+#weather-page-section #weather-types-swiper-container .swiper-slide {
+    width: 100%; /* Default for mobile */
+    flex-shrink: 0;
+    padding: 0 0.5rem; /* Small padding between the slide content and container edge */
+}
+@media (min-width: 640px) { /* sm breakpoint */
+    #weather-page-section #weather-types-swiper-container .swiper-slide {
+        width: calc(100% / 2); /* 2 cards per row */
+    }
+}
+@media (min-width: 1024px) { /* lg breakpoint */
+    #weather-page-section #weather-types-swiper-container .swiper-slide {
+        width: calc(100% / 4); /* 4 cards per row */
+    }
+}

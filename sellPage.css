@@ -1,0 +1,47 @@
+/* Sell Page Specific Styles */
+.sell-hero {
+    background-color: #4CAF50; /* A green background */
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    border-radius: 0.75rem; /* rounded-xl */
+}
+
+/* Additional styles for input fields and buttons within the sell page */
+.product-input,
+.product-textarea {
+    border: 1px solid #e2e8f0; /* Light gray border */
+    border-radius: 0.5rem; /* Rounded corners */
+    padding: 0.75rem 1rem; /* Padding inside */
+    width: 100%; /* Full width */
+    font-size: 1rem; /* Standard font size */
+    color: #333; /* Dark text */
+    transition: all 0.2s ease-in-out; /* Smooth transitions for focus */
+}
+
+.product-input:focus,
+.product-textarea:focus {
+    outline: none;
+    border-color: #61A356; /* Green border on focus */
+    box-shadow: 0 0 0 3px rgba(97, 163, 86, 0.2); /* Light green shadow on focus */
+}
+
+.product-button {
+    background-color: #34D399; /* A vibrant green for the button */
+    color: white;
+    font-weight: 600; /* Semi-bold */
+    padding: 0.75rem 1.5rem; /* Padding for button */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.2s ease-in-out; /* Smooth transitions */
+    cursor: pointer;
+}
+
+.product-button:hover {
+    background-color: #27B080; /* Darker green on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}

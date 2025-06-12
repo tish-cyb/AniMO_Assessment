@@ -1,0 +1,24 @@
+.hero-banner {
+    background-image: url('images/SMFI-KSK-Calasiao-Pangasinan\ \(1\).jpeg');
+    background-size: cover;
+    background-position: center;
+}
+.card-gradient-bg {
+    background: linear-gradient(to right, #61A356, #8CC63F);
+}
+/* Ensure swiper slides take full width of their container for single item per view */
+#about-page-section #vision-swiper-container .swiper-slide {
+    width: 100%; /* Always full width for single column layout */
+    flex-shrink: 0;
+    padding: 0 0.5rem; /* Small padding between the slide content and container edge */
+}
+#about-page-section .swiper-slide > div {
+    padding: 1rem;
+}
+/* Specific styling for the section background image */
+#about-page-section .farming-tips-bg {
+    background-image: url('https://placehold.co/250x250/90EE90/000?text=Farmer'); /* Placeholder for farmer background image */
+    background-size: contain;
+    background-position: right center;
+    background-repeat: no-repeat;
+}

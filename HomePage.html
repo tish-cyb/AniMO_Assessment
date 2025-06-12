@@ -1,0 +1,154 @@
+<section id="home-page-section">
+    <!-- Hero Section -->
+    <header class="hero-section text-white py-20 px-4 md:px-8 flex flex-col justify-center items-start relative overflow-hidden pt-20">
+        <div class="absolute inset-0 bg-black opacity-30"></div>
+        <div class="z-10 max-w-2xl">
+            <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+                Ani ng Inobasyon at Modernong Opportunidad
+            </h1>
+            <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" onclick="document.getElementById('home-page-rsbsa').scrollIntoView({ behavior: 'smooth' });">
+                JOIN US
+            </button>
+        </div>
+    </header>
+
+    <main class="w-full max-w-7xl mx-auto py-8 px-4 space-y-12">
+        <!-- What is RSBSA Section -->
+        <section id="home-page-rsbsa" class="bg-green-600 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8 shadow-lg">
+            <img src="images/DSC09543_copy.jpg" alt="Farmer Working" class="rounded-2xl shadow-md w-full md:w-1/2 lg:w-2/5 object-cover">
+            <div class="text-white text-center md:text-left">
+                <h2 class="text-3xl font-bold mb-3">What is RSBSA?</h2>
+                <p class="text-lg leading-relaxed">
+                    The Registry System for Basic Sectors in Agriculture (RSBSA) is a nationwide database of farmers and fisherfolk. It serves as a targeting mechanism for the Department of Agriculture (DA) and its attached agencies to provide appropriate interventions and assistance to the agriculture sector.
+                </p>
+            </div>
+        </section>
+
+        <!-- Who Can Register & Relief for Our Farmers Section -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Who Can Register Card -->
+            <div class="bg-green-600 rounded-3xl p-6 md:p-8 flex flex-col items-center justify-center text-white text-center shadow-lg">
+                <img src="images/DSC00286.jpg" alt="Farmer Smiling" class="rounded-2xl shadow-md mb-6 w-full object-cover">
+                <h3 class="text-2xl font-bold mb-3">Who Can Register</h3>
+                <ul class="list-disc list-inside text-lg text-left w-full pl-4">
+                    <li>Farmers (crop, livestock, poultry)</li>
+                    <li>Fisherfolk (aquaculture, municipal, commercial)</li>
+                    <li>Farmworkers / Fishworkers</li>
+                    <li>Anyone involved in agriculture!</li>
+                </ul>
+            </div>
+            <!-- Relief for Our Farmers Card -->
+            <div class="bg-green-600 rounded-3xl p-6 md:p-8 flex flex-col items-center justify-center text-white text-center shadow-lg">
+                <img src="images/45202324647AM.jpg" alt="Relief to Farmers" class="rounded-2xl shadow-md mb-6 w-full object-cover">
+                <h3 class="text-2xl font-bold mb-3">Relief for Our Farmers</h3>
+                <p class="text-lg leading-relaxed">
+                    RSBSA registration opens doors to various government programs, including financial assistance, insurance, training, and farm inputs. It's crucial for every farmer to be registered to avail these benefits.
+                </p>
+            </div>
+        </section>
+
+        <!-- Step-by-Step Procedure Section - Made Interactive -->
+        <section class="bg-gradient-to-r from-green-600 to-green-700 rounded-3xl p-6 md:p-10 text-white shadow-lg text-center relative overflow-hidden">
+            <h2 class="text-3xl font-bold mb-8">Step-by-Step Procedure</h2>
+            <div class="swiper-container relative w-full overflow-hidden">
+                <div class="swiper-wrapper flex transition-transform duration-500 ease-in-out" id="home-step-swiper-wrapper">
+                    <!-- Step 1 -->
+                    <div class="swiper-slide flex-shrink-0 w-full flex flex-col items-center justify-center p-4">
+                        <div class="bg-white text-green-600 rounded-full w-20 h-20 flex items-center justify-center text-4xl font-bold mb-3 shadow-md">1</div>
+                        <p class="text-base font-medium">Prepare Your Documents</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="swiper-slide flex-shrink-0 w-full flex flex-col items-center justify-center p-4">
+                        <div class="bg-white text-green-600 rounded-full w-20 h-20 flex items-center justify-center text-4xl font-bold mb-3 shadow-md">2</div>
+                        <p class="text-base font-medium">Visit MAO/BFAR</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="swiper-slide flex-shrink-0 w-full flex flex-col items-center justify-center p-4">
+                        <div class="bg-white text-green-600 rounded-full w-20 h-20 flex items-center justify-center text-4xl font-bold mb-3 shadow-md">3</div>
+                        <p class="text-base font-medium">Fill Up Form</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="swiper-slide flex-shrink-0 w-full flex flex-col items-center justify-center p-4">
+                        <div class="bg-white text-green-600 rounded-full w-20 h-20 flex items-center justify-center text-4xl font-bold mb-3 shadow-md">4</div>
+                        <p class="text-base font-medium">Receive Your ID</p>
+                    </div>
+                </div>
+                <!-- Navigation Arrows -->
+                <button id="home-prev-step" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white bg-opacity-75 text-green-700 p-2 rounded-full shadow-lg hover:bg-opacity-100 transition-all focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fas fa-chevron-left text-xl"></i>
+                </button>
+                <button id="home-next-step" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white bg-opacity-75 text-green-700 p-2 rounded-full shadow-lg hover:bg-opacity-100 transition-all focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fas fa-chevron-right text-xl"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- It's Easy To Get Registered! Section - Updated to 5 cards with swiper -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 shadow-lg relative overflow-hidden">
+            <h2 class="text-3xl font-bold text-center mb-8 text-green-700">It's Easy To Get Registered!</h2>
+            <div class="swiper-container relative w-full overflow-hidden">
+                <div class="swiper-wrapper flex transition-transform duration-500 ease-in-out" id="home-easy-register-swiper-wrapper">
+                    <!-- Card 1: Municipal Agriculture Office (MAO) -->
+                    <div class="swiper-slide flex-shrink-0 p-2">
+                        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-4 text-white flex flex-col items-center text-center shadow-md w-full h-full min-h-[180px] justify-center">
+                            <i class="fas fa-building text-5xl mb-3 mt-2"></i>
+                            <h3 class="text-lg font-semibold mb-1">Visit your nearest Municipal Agriculture Office (MAO)</h3>
+                        </div>
+                    </div>
+                    <!-- Card 2: Bring Valid ID -->
+                    <div class="swiper-slide flex-shrink-0 p-2">
+                        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-4 text-white flex flex-col items-center text-center shadow-md w-full h-full min-h-[180px] justify-center">
+                            <i class="fas fa-id-card text-5xl mb-3 mt-2"></i>
+                            <h3 class="text-lg font-semibold mb-1">Bring a Valid Government ID</h3>
+                        </div>
+                    </div>
+                    <!-- Card 3: PhilSys/Barangay Certificate/Passport -->
+                    <div class="swiper-slide flex-shrink-0 p-2">
+                        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-4 text-white flex flex-col items-center text-center shadow-md w-full h-full min-h-[180px] justify-center">
+                            <i class="fas fa-file-alt text-5xl mb-3 mt-2"></i>
+                            <h3 class="text-lg font-semibold mb-1">PhilSys, Barangay Certificate, Passport</h3>
+                        </div>
+                    </div>
+                    <!-- Card 4: Fill out Registration Form -->
+                    <div class="swiper-slide flex-shrink-0 p-2">
+                        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-4 text-white flex flex-col items-center text-center shadow-md w-full h-full min-h-[180px] justify-center">
+                            <i class="fas fa-clipboard-list text-5xl mb-3 mt-2"></i>
+                            <h3 class="text-lg font-semibold mb-1">Fill out the RSBSA registration form</h3>
+                        </div>
+                    </div>
+                    <!-- Card 5: Wait for Confirmation -->
+                    <div class="swiper-slide flex-shrink-0 p-2">
+                        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-4 text-white flex flex-col items-center text-center shadow-md w-full h-full min-h-[180px] justify-center">
+                            <i class="fas fa-check-circle text-5xl mb-3 mt-2"></i>
+                            <h3 class="text-lg font-semibold mb-1">Wait for confirmation and receive your RSBSA ID number</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation Arrows for Easy Register -->
+                <button id="home-prev-easy-register" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white bg-opacity-75 text-green-700 p-2 rounded-full shadow-lg hover:bg-opacity-100 transition-all focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fas fa-chevron-left text-xl"></i>
+                </button>
+                <button id="home-next-easy-register" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white bg-opacity-75 text-green-700 p-2 rounded-full shadow-lg hover:bg-opacity-100 transition-all focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fas fa-chevron-right text-xl"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Once You Have Your RSBSA ID Section -->
+        <section class="bg-green-100 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-8 shadow-lg">
+            <div class="flex-1 text-green-800">
+                <h2 class="text-2xl font-bold mb-4">Once You Have Your RSBSA ID:</h2>
+                <ul class="list-disc list-inside text-lg space-y-2">
+                    <li>Keep it safe and accessible.</li>
+                    <li>Use it when applying for DA programs.</li>
+                    <li>Ensure your information is up-to-date.</li>
+                </ul>
+            </div>
+            <div class="flex-1">
+                <img src="images/sample.png" alt="RSBSA ID Sample" class="rounded-2xl shadow-md w-full object-cover">
+                <p class="text-xs text-center text-gray-600 mt-2">RSBSA Number | System Generated</p>
+                <p class="text-sm text-center text-green-700 font-semibold">11-024-03-0000-0000</p>
+            </div>
+        </section>
+    </main>
+</section>

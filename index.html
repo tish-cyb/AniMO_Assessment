@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniMo - Your Agri-Partner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5; /* Light grey background */
+            color: #333;
+        }
+        .page-content-container {
+            /* Adjusted padding-top to precisely account for the fixed nav bar's new, slim height */
+            padding-top: 64px; /* Calculated: Logo height (64px) + py-0 (0px padding) = 64px */
+            min-height: calc(100vh - 64px - 140px); /* Recalculate based on new nav height and footer height */
+        }
+
+        /* Modal Styles (global as it can be triggered from anywhere, though tied to Marketplace logic) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            position: relative;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #888;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="w-full bg-green-700 text-white py-0 px-4 flex justify-between items-center fixed top-0 left-0 z-20 shadow-md">
+        <div class="flex items-center space-x-2">
+            <img src="images/AniMo_LOGO.png" alt="AniMo Logo" class="w-16 h-16 object-contain">
+        </div>
+        <div class="flex items-center space-x-4 text-sm" id="main-nav-links">
+            <a href="#home" class="nav-link hover:text-green-200" data-target="home">HOME</a>
+            <a href="#about" class="nav-link hover:text-green-200" data-target="about">ABOUT US</a>
+            <a href="#weather" class="nav-link hover:text-green-200" data-target="weather">WEATHER</a>
+            <a href="#loan" class="nav-link hover:text-green-200" data-target="loan">LOAN</a>
+            <a href="#marketplace" class="nav-link hover:text-green-200" data-target="marketplace">MARKETPLACE</a>
+            <a href="#sell" class="nav-link hover:text-green-200 hidden" data-target="sell" id="sell-link">SELL</a>
+            <div class="user-icons space-x-4 hidden" id="user-icons">
+                <i class="fas fa-bell text-white cursor-pointer"></i>
+                <i class="fas fa-user-circle text-white text-xl cursor-pointer"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div id="page-content-container" class="page-content-container">
+        <!-- Content of individual pages will be loaded here by JavaScript -->
+    </div>
+
+    <div id="login-signup-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="modal-close-btn" id="close-modal">&times;</span>
+            <h2 class="text-2xl font-bold mb-4 text-green-700">Welcome to AniMo!</h2>
+            <p class="text-gray-700 mb-6">Please log in or sign up to continue.</p>
+
+            <div id="login-form">
+                <h3 class="text-xl font-semibold mb-3">Log Into your Account</h3>
+                <input type="text" placeholder="RSBSA ID Number:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                <div class="relative w-full mb-4">
+                    <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
+                    <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+                </div>
+                <a href="#" class="text-sm text-green-600 hover:underline mb-6 block" id="forgot-password">Forgot Password?</a>
+                <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 login-btn">
+                    Log In
+                </button>
+                <p class="text-sm text-gray-700 mt-4">You are not a member? <a href="#" class="text-green-600 hover:underline" id="show-signup">SIGN IN</a></p>
+            </div>
+
+            <div id="signup-form" class="hidden">
+                <h3 class="text-xl font-semibold mb-3">Create your Account</h3>
+                <input type="text" placeholder="Full Name:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                <input type="text" placeholder="RSBSA ID Number:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                <div class="relative w-full mb-3">
+                    <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
+                    <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+                </div>
+                <div class="relative w-full mb-4">
+                    <input type="password" placeholder="Confirm Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
+                    <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+                </div>
+                <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 signup-btn">
+                    Sign In
+                </button>
+                <p class="text-sm text-gray-700 mt-4">Already a member? <a href="#" class="text-green-600 hover:underline" id="show-login">LOG IN</a></p>
+            </div>
+
+            <div id="role-selection" class="hidden">
+                <h3 class="text-xl font-semibold mb-4">How do you want to use AniMo?</h3>
+                <button class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 mb-3" id="select-farmer-role">
+                    Continue as Farmer/Seller
+                </button>
+                <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105" id="select-buyer-role">
+                    Continue as Buyer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer - Adjusted padding to py-4, copyright moved to be the last element -->
+    <footer class="w-full bg-green-700 text-white py-4 px-4 text-center">
+        <div class="flex justify-center space-x-6 mb-2"> <!-- Reduced margin-bottom -->
+            <a href="#" class="text-2xl hover:text-green-200 transition-colors"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-2xl hover:text-green-200 transition-colors"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-2xl hover:text-green-200 transition-colors"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-2xl hover:text-green-200 transition-colors"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="flex justify-center space-x-4 text-sm mb-2"> <!-- Reduced margin-bottom -->
+            <a href="#" class="hover:underline">Terms of Use</a>
+            <span>|</span>
+            <a href="#" class="hover:underline">Privacy Policy</a>
+            <span>|</span>
+            <a href="#" class="hover:underline">Legal & Policies</a>
+        </div>
+        <!-- Copyright is now the last element in the footer, visually at the bottom -->
+        <p class="text-xs">Copyright &copy; 2025 AniMoPH. All Rights Reserved.</p> <!-- Changed font size to text-xs -->
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
