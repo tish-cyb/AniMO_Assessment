@@ -1,11 +1,37 @@
 <style>
     /* Marketplace Page Specific Styles */
     .hero-banner {
-    background-image: url('images/Specialty\ Crops\ Photo.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 250px;
-}
+        /* Set background image for the hero banner, using the provided image */
+        background-image: url('uploaded:image_5319d0.jpg-3a21ed48-784c-4c2a-a9d4-6b1691cb0a17');
+        background-size: cover;
+        background-position: center;
+        /* Adjusted height to be consistent with previous requests (250px) */
+        height: 250px;
+        position: relative; /* Ensure relative positioning for overlay */
+        display: flex; /* Use flexbox for content alignment */
+        flex-direction: column; /* Stack children vertically */
+        justify-content: center; /* Center content vertically */
+        align-items: center; /* Center content horizontally */
+        padding: 6rem 4rem; /* Adjusted padding for content positioning */
+        /* Removed max-width and margin from here to allow it to expand to edges */
+    }
+    .hero-banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.3); /* Dark overlay for text readability */
+        z-index: 0;
+    }
+    .hero-banner .z-10 {
+        z-index: 1; /* Ensure text and search bar are above the overlay */
+        /* Keep max-width for content readability, and ensure it's centered */
+        max-width: 40rem; /* Constrain width for better readability, similar to home page's max-w-2xl */
+        width: 100%; /* Ensure it takes full width within its max-width */
+        text-align: center; /* Center text within the z-10 div */
+    }
     .product-card {
         display: flex;
         flex-direction: column;
@@ -16,6 +42,10 @@
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
         border: 1px solid #e2e8f0; /* border-gray-200 */
         cursor: pointer; /* Make product cards clickable */
+        transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+    }
+    .product-card:hover {
+        transform: translateY(-5px); /* Lift card on hover */
     }
     .product-card img {
         width: 80px;
@@ -26,6 +56,7 @@
     }
 
     /* Modal Styles (specific to marketplace as it triggers here) */
+    /* NOTE: These styles are here for reference, the actual modal HTML is in index.html */
     .modal-overlay {
         position: fixed;
         top: 0;
@@ -36,7 +67,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 100;
+        z-index: 1000; /* Higher z-index to ensure it's on top */
     }
     .modal-content {
         background-color: #fff;
@@ -87,22 +118,22 @@
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <!-- Product Card: Lettuce -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="LETTUCE" data-product-price="60.00" data-product-unit="1KG / HEAD" data-product-location="Metro Manila" data-product-image="https://placehold.co/80x80/E0F2F7/000?text=LETTUCE">
                         <img src="https://placehold.co/80x80/E0F2F7/000?text=LETTUCE" alt="Lettuce">
                         <span class="text-sm font-medium text-gray-800 text-center">LETTUCE</span>
                     </div>
                     <!-- Product Card: Carrots -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="CARROTS" data-product-price="80.00" data-product-unit="PER KILO" data-product-location="Metro Manila" data-product-image="https://placehold.co/80x80/FFDDC1/000?text=CARROTS">
                         <img src="https://placehold.co/80x80/FFDDC1/000?text=CARROTS" alt="Carrots">
                         <span class="text-sm font-medium text-gray-800 text-center">CARROTS</span>
                     </div>
                     <!-- Product Card: Tomatoes -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="TOMATOES" data-product-price="180.00" data-product-unit="PER KILO" data-product-location="Metro Manila" data-product-image="https://placehold.co/80x80/FCE7D7/000?text=TOMATOES">
                         <img src="https://placehold.co/80x80/FCE7D7/000?text=TOMATOES" alt="Tomatoes">
                         <span class="text-sm font-medium text-gray-800 text-center">TOMATOES</span>
                     </div>
                     <!-- Product Card: Rice -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="RICE" data-product-price="50.00" data-product-unit="PER KILO" data-product-location="Laguna" data-product-image="https://placehold.co/80x80/F0F8FF/000?text=RICE">
                         <img src="https://placehold.co/80x80/F0F8FF/000?text=RICE" alt="Rice">
                         <span class="text-sm font-medium text-gray-800 text-center">RICE</span>
                     </div>
@@ -124,12 +155,12 @@
                     </div>
                     <!-- Catalog Item: Crops -->
                     <div class="flex flex-col items-center p-3 bg-gray-100 rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all">
-                        <img src="https://placehold.co/120x80/F5E6CC/000?text=Crops" alt="Crops">
+                        <img src="https://placehold.co/120x80/F5E6CC/000?text=Crops" alt="Crops" class="w-full h-24 object-cover rounded-lg mb-2">
                         <span class="text-base font-medium text-gray-800">Crops</span>
                     </div>
                     <!-- Catalog Item: Supplies -->
                     <div class="flex flex-col items-center p-3 bg-gray-100 rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all">
-                        <img src="https://placehold.co/120x80/D0F0C0/000?text=Supplies" alt="Supplies">
+                        <img src="https://placehold.co/120x80/D0F0C0/000?text=Supplies" alt="Supplies" class="w-full h-24 object-cover rounded-lg mb-2">
                         <span class="text-base font-medium text-gray-800">Supplies</span>
                     </div>
                 </div>
@@ -149,22 +180,22 @@
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <!-- Product Card: Lettuce -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="LETTUCE" data-product-price="60.00" data-product-unit="1KG / HEAD" data-product-location="Metro Manila" data-product-image="https://placehold.co/80x80/E0F2F7/000?text=LETTUCE">
                         <img src="https://placehold.co/80x80/E0F2F7/000?text=LETTUCE" alt="Lettuce">
                         <span class="text-sm font-medium text-gray-800 text-center">LETTUCE</span>
                     </div>
                     <!-- Product Card: Carrots -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="CARROTS" data-product-price="80.00" data-product-unit="PER KILO" data-product-location="Metro Manila" data-product-image="https://placehold.co/80x80/FFDDC1/000?text=CARROTS">
                         <img src="https://placehold.co/80x80/FFDDC1/000?text=CARROTS" alt="Carrots">
                         <span class="text-sm font-medium text-gray-800 text-center">CARROTS</span>
                     </div>
                     <!-- Product Card: Tomatoes -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="TOMATOES" data-product-price="180.00" data-product-unit="PER KILO" data-product-location="Metro Manila" data-product-image="https://placehold.co/80x80/FCE7D7/000?text=TOMATOES">
                         <img src="https://placehold.co/80x80/FCE7D7/000?text=TOMATOES" alt="Tomatoes">
                         <span class="text-sm font-medium text-gray-800 text-center">TOMATOES</span>
                     </div>
                     <!-- Product Card: Grapes (Placeholder) -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="GRAPES" data-product-price="250.00" data-product-unit="PER BUNCH" data-product-location="Batangas" data-product-image="https://placehold.co/80x80/C0E0B0/000?text=GRAPES">
                         <img src="https://placehold.co/80x80/C0E0B0/000?text=GRAPES" alt="Grapes">
                         <span class="text-sm font-medium text-gray-800 text-center">GRAPES</span>
                     </div>
@@ -185,22 +216,22 @@
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <!-- Product Card: Rice -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="RICE" data-product-price="50.00" data-product-unit="PER KILO" data-product-location="Laguna" data-product-image="https://placehold.co/80x80/F0F8FF/000?text=RICE">
                         <img src="https://placehold.co/80x80/F0F8FF/000?text=RICE" alt="Rice">
                         <span class="text-sm font-medium text-gray-800 text-center">RICE</span>
                     </div>
                     <!-- Product Card: Wheat -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="WHEAT" data-product-price="45.00" data-product-unit="PER KILO" data-product-location="Bulacan" data-product-image="https://placehold.co/80x80/F0F8FF/000?text=WHEAT">
                         <img src="https://placehold.co/80x80/F0F8FF/000?text=WHEAT" alt="Wheat">
                         <span class="text-sm font-medium text-gray-800 text-center">WHEAT</span>
                     </div>
                     <!-- Product Card: Corn -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="CORN" data-product-price="30.00" data-product-unit="PER COB" data-product-location="Pangasinan" data-product-image="https://placehold.co/80x80/FFED8C/000?text=CORN">
                         <img src="https://placehold.co/80x80/FFED8C/000?text=CORN" alt="Corn">
                         <span class="text-sm font-medium text-gray-800 text-center">CORN</span>
                     </div>
                     <!-- Product Card: Beans (Placeholder) -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="BEANS" data-product-price="120.00" data-product-unit="PER KILO" data-product-location="Nueva Ecija" data-product-image="https://placehold.co/80x80/E0F0E0/000?text=BEANS">
                         <img src="https://placehold.co/80x80/E0F0E0/000?text=BEANS" alt="Beans">
                         <span class="text-sm font-medium text-gray-800 text-center">BEANS</span>
                     </div>
@@ -221,22 +252,22 @@
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <!-- Product Card: Fertilizer -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="FERTILIZER" data-product-price="300.00" data-product-unit="PER BAG" data-product-location="Cavite" data-product-image="https://placehold.co/80x80/D0F0C0/000?text=FERTILIZER">
                         <img src="https://placehold.co/80x80/D0F0C0/000?text=FERTILIZER" alt="Fertilizer">
                         <span class="text-sm font-medium text-gray-800 text-center">FERTILIZER</span>
                     </div>
                     <!-- Product Card: Pesticide -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="PESTICIDE" data-product-price="150.00" data-product-unit="PER LITER" data-product-location="Laguna" data-product-image="https://placehold.co/80x80/D0F0C0/000?text=PESTICIDE">
                         <img src="https://placehold.co/80x80/D0F0C0/000?text=PESTICIDE" alt="Pesticide">
                         <span class="text-sm font-medium text-gray-800 text-center">PESTICIDE</span>
                     </div>
                     <!-- Product Card: Seed Tray -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="SEED TRAY" data-product-price="50.00" data-product-unit="PER PIECE" data-product-location="Batangas" data-product-image="https://placehold.co/80x80/F0F0F0/000?text=SEED+TRAY">
                         <img src="https://placehold.co/80x80/F0F0F0/000?text=SEED+TRAY" alt="Seed Tray">
                         <span class="text-sm font-medium text-gray-800 text-center">SEED TRAY</span>
                     </div>
                     <!-- Product Card: Garden Gloves (Placeholder) -->
-                    <div class="product-card">
+                    <div class="product-card" data-product-name="GARDEN GLOVES" data-product-price="100.00" data-product-unit="PER PAIR" data-product-location="Quezon" data-product-image="https://placehold.co/80x80/D0F0C0/000?text=GLOVES">
                         <img src="https://placehold.co/80x80/D0F0C0/000?text=GLOVES" alt="Garden Gloves">
                         <span class="text-sm font-medium text-gray-800 text-center">GARDEN GLOVES</span>
                     </div>
@@ -245,54 +276,60 @@
         </main>
     </div>
 
-    <!-- Login/Signup Modal (Hidden by default, included here because it's triggered by Marketplace) -->
-    <div id="login-signup-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <span class="modal-close-btn" id="close-modal">&times;</span>
-            <h2 class="text-2xl font-bold mb-4 text-green-700">Welcome to AniMo!</h2>
-            <p class="text-gray-700 mb-6">Please log in or sign up to continue.</p>
+    <!-- This script attaches event listeners for product cards -->
+    <script>
+        // Ensure this script runs only after the DOM for marketplace is loaded
+        // It's exposed globally by the main script.js after injection
+        function attachMarketplaceProductListeners() {
+            console.log("[marketplace.html] attachMarketplaceProductListeners called. Attaching product card listeners.");
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                // Clone the node to remove any previously attached event listeners
+                const newCard = card.cloneNode(true);
+                card.parentNode.replaceChild(newCard, card);
 
-            <div id="login-form">
-                <h3 class="text-xl font-semibold mb-3">Log Into your Account</h3>
-                <input type="text" placeholder="RSBSA ID Number:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
-                <div class="relative w-full mb-4">
-                    <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
-                    <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
-                </div>
-                <a href="#" class="text-sm text-green-600 hover:underline mb-6 block" id="forgot-password">Forgot Password?</a>
-                <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 login-btn">
-                    Log In
-                </button>
-                <p class="text-sm text-gray-700 mt-4">You are not a member? <a href="#" class="text-green-600 hover:underline" id="show-signup">SIGN IN</a></p>
-            </div>
+                newCard.addEventListener('click', () => {
+                    // Access window.currentUserRole directly, assuming script.js exposes it globally
+                    if (window.currentUserRole === 'guest') {
+                        // If the user is a guest, show the login/signup modal
+                        if (window.showModalView) {
+                            window.showModalView('login-form');
+                            console.log("[marketplace.html] Guest user clicked product. Showing login modal.");
+                        } else {
+                            console.error("[marketplace.html] window.showModalView is not defined.");
+                        }
+                    } else {
+                        // If user is logged in, prepare product details and start checkout modal
+                        console.log('[marketplace.html] Logged-in user clicked product. Starting checkout modal.');
+                        const productDetails = {
+                            name: newCard.dataset.productName,
+                            price: parseFloat(newCard.dataset.productPrice),
+                            unit: newCard.dataset.productUnit,
+                            location: newCard.dataset.productLocation,
+                            image: newCard.dataset.productImage,
+                            quantity: 1 // Default quantity when adding from marketplace
+                        };
+                        // Call the global function in script.js to open the checkout modal
+                        if (window.startCheckout) {
+                            window.startCheckout(productDetails);
+                        } else {
+                            console.error("[marketplace.html] window.startCheckout is not defined. Ensure script.js is loaded correctly.");
+                        }
+                    }
+                });
+            });
+        }
+        // Expose this function globally so script.js can call it after loading this fragment
+        window.attachMarketplaceProductListeners = attachMarketplaceProductListeners;
 
-            <div id="signup-form" class="hidden">
-                <h3 class="text-xl font-semibold mb-3">Create your Account</h3>
-                <input type="text" placeholder="Full Name:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
-                <input type="text" placeholder="RSBSA ID Number:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
-                <div class="relative w-full mb-3">
-                    <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
-                    <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
-                </div>
-                <div class="relative w-full mb-4">
-                    <input type="password" placeholder="Confirm Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
-                    <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
-                </div>
-                <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 signup-btn">
-                    Sign In
-                </button>
-                <p class="text-sm text-gray-700 mt-4">Already a member? <a href="#" class="text-green-600 hover:underline" id="show-login">LOG IN</a></p>
-            </div>
-
-            <div id="role-selection" class="hidden">
-                <h3 class="text-xl font-semibold mb-4">How do you want to use AniMo?</h3>
-                <button class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 mb-3" id="select-farmer-role">
-                    Continue as Farmer/Seller
-                </button>
-                <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105" id="select-buyer-role">
-                    Continue as Buyer
-                </button>
-            </div>
-        </div>
-    </div>
+        // Immediately call if this script happens to be loaded directly (e.g., for testing in isolation)
+        // For dynamic loading by script.js, the call will be explicit from script.js.
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            // This checks if the DOM is already ready, which is typical for dynamically injected content
+            attachMarketplaceProductListeners();
+        } else {
+            // Fallback for slower loading or if script is in head (less common for fragments)
+            document.addEventListener('DOMContentLoaded', attachMarketplaceProductListeners);
+        }
+    </script>
 </section>

@@ -1,4 +1,19 @@
-<section id="home-page-section">
+<style>
+    /* Home Page Specific Styles */
+    .hero-section {
+        /* Updated to use the image from your uploaded files */
+        background-image: url('uploaded:image_7c7077.png-220ac6bf-ca49-4584-bba3-6cef1dcdf5cb');
+        background-size: cover;
+        background-position: center;
+    }
+    /* Swiper slide styling for home page */
+    #home-page-section .swiper-slide {
+        flex-shrink: 0;
+        width: 100%;
+        padding: 0 0.5rem;
+    }
+</style>
+<section id="home-page-section" class="page-section">
     <!-- Hero Section -->
     <header class="hero-section text-white py-20 px-4 md:px-8 flex flex-col justify-center items-start relative overflow-hidden pt-20">
         <div class="absolute inset-0 bg-black opacity-30"></div>
@@ -47,40 +62,10 @@
             </div>
         </section>
 
-        <!-- Step-by-Step Procedure Section - Made Interactive -->
-        <section class="bg-gradient-to-r from-green-600 to-green-700 rounded-3xl p-6 md:p-10 text-white shadow-lg text-center relative overflow-hidden">
-            <h2 class="text-3xl font-bold mb-8">Step-by-Step Procedure</h2>
-            <div class="swiper-container relative w-full overflow-hidden">
-                <div class="swiper-wrapper flex transition-transform duration-500 ease-in-out" id="home-step-swiper-wrapper">
-                    <!-- Step 1 -->
-                    <div class="swiper-slide flex-shrink-0 w-full flex flex-col items-center justify-center p-4">
-                        <div class="bg-white text-green-600 rounded-full w-20 h-20 flex items-center justify-center text-4xl font-bold mb-3 shadow-md">1</div>
-                        <p class="text-base font-medium">Prepare Your Documents</p>
-                    </div>
-                    <!-- Step 2 -->
-                    <div class="swiper-slide flex-shrink-0 w-full flex flex-col items-center justify-center p-4">
-                        <div class="bg-white text-green-600 rounded-full w-20 h-20 flex items-center justify-center text-4xl font-bold mb-3 shadow-md">2</div>
-                        <p class="text-base font-medium">Visit MAO/BFAR</p>
-                    </div>
-                    <!-- Step 3 -->
-                    <div class="swiper-slide flex-shrink-0 w-full flex flex-col items-center justify-center p-4">
-                        <div class="bg-white text-green-600 rounded-full w-20 h-20 flex items-center justify-center text-4xl font-bold mb-3 shadow-md">3</div>
-                        <p class="text-base font-medium">Fill Up Form</p>
-                    </div>
-                    <!-- Step 4 -->
-                    <div class="swiper-slide flex-shrink-0 w-full flex flex-col items-center justify-center p-4">
-                        <div class="bg-white text-green-600 rounded-full w-20 h-20 flex items-center justify-center text-4xl font-bold mb-3 shadow-md">4</div>
-                        <p class="text-base font-medium">Receive Your ID</p>
-                    </div>
-                </div>
-                <!-- Navigation Arrows -->
-                <button id="home-prev-step" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white bg-opacity-75 text-green-700 p-2 rounded-full shadow-lg hover:bg-opacity-100 transition-all focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed">
-                    <i class="fas fa-chevron-left text-xl"></i>
-                </button>
-                <button id="home-next-step" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white bg-opacity-75 text-green-700 p-2 rounded-full shadow-lg hover:bg-opacity-100 transition-all focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed">
-                    <i class="fas fa-chevron-right text-xl"></i>
-                </button>
-            </div>
+        <!-- Step-by-Step Procedure Section - Image replacement -->
+        <section class="bg-gradient-to-r from-green-600 to-green-700 rounded-3xl p-6 md:p-10 text-white shadow-lg text-center relative overflow-hidden flex justify-center items-center">
+            <h2 class="text-3xl font-bold sr-only">Step-by-Step Procedure</h2>
+            <img src="uploaded:image_6d6112.png-0c091063-594b-4eca-932c-76ff318379b4" alt="Step-by-Step Procedure" class="w-full h-auto object-contain max-w-full">
         </section>
 
         <!-- It's Easy To Get Registered! Section - Updated to 5 cards with swiper -->

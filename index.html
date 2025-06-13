@@ -31,6 +31,7 @@
             justify-content: center;
             align-items: center;
             z-index: 100;
+            overflow-y: auto; /* Allow scrolling for modal content if it overflows */
         }
         .modal-content {
             background-color: #fff;
@@ -53,23 +54,45 @@
         .hidden {
             display: none;
         }
+
+        /* NEW: Styles for the Checkout Modal to ensure it looks good when popped up */
+        #checkout-modal .modal-content {
+            max-width: 90%;
+            width: 500px; /* Adjust width for checkout form */
+            padding: 0; /* No padding directly on modal-content, it's handled by inner divs */
+            text-align: left; /* Align checkout content left */
+        }
     </style>
 </head>
 <body class="antialiased">
     <nav class="w-full bg-green-700 text-white py-0 px-4 flex justify-between items-center fixed top-0 left-0 z-20 shadow-md">
         <div class="flex items-center space-x-2">
-            <img src="images/AniMo_LOGO.png" alt="AniMo Logo" class="w-16 h-16 object-contain">
+            <!-- AniMo Logo - Corrected src to use images/AniMo_LOGO.png consistent with file structure -->
+            <img src="images/AniMo_LOGO.png" alt="AniMo Logo" class="w-24 h-16 object-contain">
         </div>
-        <div class="flex items-center space-x-4 text-sm" id="main-nav-links">
+        <div class="flex items-center space-x-6 text-sm relative" id="main-nav-links">
             <a href="#home" class="nav-link hover:text-green-200" data-target="home">HOME</a>
             <a href="#about" class="nav-link hover:text-green-200" data-target="about">ABOUT US</a>
             <a href="#weather" class="nav-link hover:text-green-200" data-target="weather">WEATHER</a>
             <a href="#loan" class="nav-link hover:text-green-200" data-target="loan">LOAN</a>
             <a href="#marketplace" class="nav-link hover:text-green-200" data-target="marketplace">MARKETPLACE</a>
+            <!-- SELL link - Initially hidden, shown for farmers by JS -->
             <a href="#sell" class="nav-link hover:text-green-200 hidden" data-target="sell" id="sell-link">SELL</a>
-            <div class="user-icons space-x-4 hidden" id="user-icons">
+            <!-- User Icons - Initially hidden, shown for logged-in users by JS -->
+            <div class="user-icons flex items-center space-x-4 hidden" id="user-icons">
                 <i class="fas fa-bell text-white cursor-pointer"></i>
-                <i class="fas fa-user-circle text-white text-xl cursor-pointer"></i>
+                <i class="fas fa-user-circle text-white text-xl cursor-pointer" id="profile-icon"></i>
+            </div>
+
+            <!-- Profile Popup Menu (Hidden by default) -->
+            <div id="profile-popup-menu" class="absolute hidden bg-white rounded-lg shadow-xl py-2 w-48 right-0 top-full mt-2 z-30">
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="profile">Profile</a>
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="my-activity">My Activity</a>
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="govt-updates">Gov't Updates</a>
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="animo-services">AniMo Services</a>
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="learning-hub">Learning Hub / Guides</a>
+                <hr class="my-1 border-gray-200">
+                <a href="#" class="block px-4 py-2 text-red-600 hover:bg-red-50 nav-popup-link" data-action="logout">Log Out</a>
             </div>
         </div>
     </nav>
@@ -78,6 +101,7 @@
         <!-- Content of individual pages will be loaded here by JavaScript -->
     </div>
 
+    <!-- Login/Signup Modal -->
     <div id="login-signup-modal" class="modal-overlay hidden">
         <div class="modal-content">
             <span class="modal-close-btn" id="close-modal">&times;</span>
@@ -86,6 +110,7 @@
 
             <div id="login-form">
                 <h3 class="text-xl font-semibold mb-3">Log Into your Account</h3>
+                <!-- Changed input type from email to text for RSBSA ID Number -->
                 <input type="text" placeholder="RSBSA ID Number:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
                 <div class="relative w-full mb-4">
                     <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
@@ -95,12 +120,13 @@
                 <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 login-btn">
                     Log In
                 </button>
-                <p class="text-sm text-gray-700 mt-4">You are not a member? <a href="#" class="text-green-600 hover:underline" id="show-signup">SIGN IN</a></p>
+                <p class="text-sm text-gray-700 mt-4">You are not a member? <a href="#" class="text-green-600 hover:underline" id="show-signup">SIGN UP</a></p>
             </div>
 
             <div id="signup-form" class="hidden">
                 <h3 class="text-xl font-semibold mb-3">Create your Account</h3>
                 <input type="text" placeholder="Full Name:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                <!-- Added RSBSA ID Number input to signup form -->
                 <input type="text" placeholder="RSBSA ID Number:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
                 <div class="relative w-full mb-3">
                     <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
@@ -111,7 +137,7 @@
                     <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
                 </div>
                 <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 signup-btn">
-                    Sign In
+                    Sign Up
                 </button>
                 <p class="text-sm text-gray-700 mt-4">Already a member? <a href="#" class="text-green-600 hover:underline" id="show-login">LOG IN</a></p>
             </div>
@@ -124,6 +150,32 @@
                 <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105" id="select-buyer-role">
                     Continue as Buyer
                 </button>
+            </div>
+            <!-- RSBSA Login Form -->
+            <div id="rsbsa-login-form" class="hidden">
+                <h3 class="text-xl font-semibold mb-3">Farmer Login (RSBSA)</h3>
+                <input type="text" placeholder="RSBSA ID Number:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                <div class="relative w-full mb-4">
+                    <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
+                    <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+                </div>
+                <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 rsbsa-login-btn">
+                    Log In with RSBSA
+                </button>
+                <p class="text-sm text-gray-700 mt-4">
+                    Don't have an RSBSA ID? <a href="#" class="text-green-600 hover:underline" id="learn-more-rsbsa">Learn More</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW: Checkout Process Modal -->
+    <div id="checkout-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <!-- Content of checkoutProcess.html will be loaded here -->
+            <span class="modal-close-btn" id="close-checkout-modal">&times;</span>
+            <div id="checkout-modal-content-area" class="w-full h-full">
+                <!-- checkoutProcess.html content will be injected here -->
             </div>
         </div>
     </div>
