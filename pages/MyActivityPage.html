@@ -1,0 +1,191 @@
+<style>
+    /* My Activity Page Specific Styles */
+    .section-header-bg {
+        background-color: #37833a; /* Dark green matching navbar */
+    }
+    .card-border-green {
+        border-color: #4CAF50; /* A medium green for card borders */
+    }
+    .activity-table-header {
+        background-color: #4CAF50; /* Green for table headers */
+    }
+</style>
+<section id="my-activity-page-section" class="page-section pt-8 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">MY ACTIVITY</h1>
+
+    <!-- My Listings Section -->
+    <div class="bg-white rounded-3xl shadow-xl p-6 md:p-8 mb-8">
+        <div class="section-header-bg text-white font-semibold py-3 px-6 rounded-t-2xl text-xl mb-6">
+            MY LISTINGS
+        </div>
+
+        <!-- Vegetables Listings -->
+        <h2 class="text-xl font-bold text-gray-800 mb-4 px-2">VEGETABLES</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            <!-- Lettuce -->
+            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200 flex flex-col items-center text-center">
+                <img src="https://placehold.co/100x100/E0F2F7/000?text=LETTUCE" alt="Lettuce" class="w-24 h-24 object-cover rounded-lg mb-2">
+                <h3 class="font-semibold text-gray-900">LETTUCE</h3>
+                <p class="text-sm text-gray-600">₱ 60.00 / KG</p>
+                <p class="text-xs text-gray-500">Available: 20 KG</p>
+            </div>
+            <!-- Carrots -->
+            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200 flex flex-col items-center text-center">
+                <img src="https://placehold.co/100x100/FCE7D7/000?text=CARROTS" alt="Carrots" class="w-24 h-24 object-cover rounded-lg mb-2">
+                <h3 class="font-semibold text-gray-900">CARROTS</h3>
+                <p class="text-sm text-gray-600">₱ 80.00 / KG</p>
+                <p class="text-xs text-gray-500">Available: 30 KG</p>
+            </div>
+            <!-- Tomatoes -->
+            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200 flex flex-col items-center text-center">
+                <img src="https://placehold.co/100x100/FFDDC1/000?text=TOMATOES" alt="Tomatoes" class="w-24 h-24 object-cover rounded-lg mb-2">
+                <h3 class="font-semibold text-gray-900">TOMATOES</h3>
+                <p class="text-sm text-gray-600">₱ 180.00 / KG</p>
+                <p class="text-xs text-gray-500">Available: 15 KG</p>
+            </div>
+        </div>
+
+        <!-- Crops Listings -->
+        <h2 class="text-xl font-bold text-gray-800 mb-4 px-2">CROPS</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            <!-- Rice -->
+            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200 flex flex-col items-center text-center">
+                <img src="https://placehold.co/100x100/F5DEB3/000?text=RICE" alt="Rice" class="w-24 h-24 object-cover rounded-lg mb-2">
+                <h3 class="font-semibold text-gray-900">RICE</h3>
+                <p class="text-sm text-gray-600">₱ 50.00 / KG</p>
+                <p class="text-xs text-gray-500">Available: 500 KG</p>
+            </div>
+        </div>
+
+        <!-- Supplies Listings -->
+        <h2 class="text-xl font-bold text-gray-800 mb-4 px-2">SUPPLIES</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Fertilizer -->
+            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200 flex flex-col items-center text-center">
+                <img src="https://placehold.co/100x100/D4EDDA/000?text=FERTILIZER" alt="Fertilizer" class="w-24 h-24 object-cover rounded-lg mb-2">
+                <h3 class="font-semibold text-gray-900">FERTILIZER</h3>
+                <p class="text-sm text-gray-600">₱ 1200.00 / Bag</p>
+                <p class="text-xs text-gray-500">Available: 10 Bags</p>
+            </div>
+            <!-- Pesticide -->
+            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200 flex flex-col items-center text-center">
+                <img src="https://placehold.co/100x100/F0FFF0/000?text=PESTICIDE" alt="Pesticide" class="w-24 h-24 object-cover rounded-lg mb-2">
+                <h3 class="font-semibold text-gray-900">PESTICIDE</h3>
+                <p class="text-sm text-gray-600">₱ 750.00 / Bottle</p>
+                <p class="text-xs text-gray-500">Available: 5 Bottles</p>
+            </div>
+            <!-- Seeds -->
+            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200 flex flex-col items-center text-center">
+                <img src="https://placehold.co/100x100/D3F3D3/000?text=SEEDS" alt="Seeds" class="w-24 h-24 object-cover rounded-lg mb-2">
+                <h3 class="font-semibold text-gray-900">SEEDS</h3>
+                <p class="text-sm text-gray-600">₱ 200.00 / Pack</p>
+                <p class="text-xs text-gray-500">Available: 50 Packs</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Orders Section -->
+    <div class="bg-white rounded-3xl shadow-xl p-6 md:p-8 mb-8">
+        <div class="section-header-bg text-white font-semibold py-3 px-6 rounded-t-2xl text-xl mb-6">
+            MY ORDERS
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded-xl overflow-hidden shadow-sm">
+                <thead>
+                    <tr class="activity-table-header text-white">
+                        <th class="py-3 px-4 text-left font-semibold">ORDER ID</th>
+                        <th class="py-3 px-4 text-left font-semibold">ITEM</th>
+                        <th class="py-3 px-4 text-left font-semibold">QUANTITY</th>
+                        <th class="py-3 px-4 text-left font-semibold">STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-200">
+                        <td class="py-3 px-4">#001234</td>
+                        <td class="py-3 px-4">Lettuce</td>
+                        <td class="py-3 px-4">5 KG</td>
+                        <td class="py-3 px-4 text-yellow-600 font-semibold">Pending</td>
+                    </tr>
+                    <tr class="border-b border-gray-200">
+                        <td class="py-3 px-4">#001235</td>
+                        <td class="py-3 px-4">Carrots</td>
+                        <td class="py-3 px-4">10 KG</td>
+                        <td class="py-3 px-4 text-green-600 font-semibold">Delivered</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4">#001236</td>
+                        <td class="py-3 px-4">Rice</td>
+                        <td class="py-3 px-4">25 KG</td>
+                        <td class="py-3 px-4 text-blue-600 font-semibold">Shipped</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- My Transactions Section -->
+    <div class="bg-white rounded-3xl shadow-xl p-6 md:p-8 mb-8">
+        <div class="section-header-bg text-white font-semibold py-3 px-6 rounded-t-2xl text-xl mb-6">
+            MY TRANSACTIONS
+        </div>
+        <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-4 mb-6">
+            <input type="text" placeholder="Search by description" class="w-full md:w-auto flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+            <select class="w-full md:w-auto p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                <option value="">Filter by type</option>
+                <option value="purchase">Purchase</option>
+                <option value="sale">Sale</option>
+                <option value="loan">Loan Payment</option>
+            </select>
+            <select class="w-full md:w-auto p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                <option value="">Filter by status</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+                <option value="failed">Failed</option>
+            </select>
+            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                Apply Filters
+            </button>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded-xl overflow-hidden shadow-sm">
+                <thead>
+                    <tr class="activity-table-header text-white">
+                        <th class="py-3 px-4 text-left font-semibold">DATE</th>
+                        <th class="py-3 px-4 text-left font-semibold">DESCRIPTION</th>
+                        <th class="py-3 px-4 text-left font-semibold">TYPE</th>
+                        <th class="py-3 px-4 text-right font-semibold">AMOUNT</th>
+                        <th class="py-3 px-4 text-left font-semibold">STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-200">
+                        <td class="py-3 px-4">2025-06-14</td>
+                        <td class="py-3 px-4">Purchase: Carrots</td>
+                        <td class="py-3 px-4">Purchase</td>
+                        <td class="py-3 px-4 text-right">₱ 800.00</td>
+                        <td class="py-3 px-4 text-green-600 font-semibold">Completed</td>
+                    </tr>
+                    <tr class="border-b border-gray-200">
+                        <td class="py-3 px-4">2025-06-13</td>
+                        <td class="py-3 px-4">Sale: Lettuce</td>
+                        <td class="py-3 px-4">Sale</td>
+                        <td class="py-3 px-4 text-right">₱ 600.00</td>
+                        <td class="py-3 px-4 text-green-600 font-semibold">Completed</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4">2025-06-12</td>
+                        <td class="py-3 px-4">Loan Payment</td>
+                        <td class="py-3 px-4">Loan</td>
+                        <td class="py-3 px-4 text-right">₱ 5,000.00</td>
+                        <td class="py-3 px-4 text-yellow-600 font-semibold">Pending</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="flex justify-end mt-6">
+            <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                Load More
+            </button>
+        </div>
+    </div>
+</section>

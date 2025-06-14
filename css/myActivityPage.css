@@ -1,0 +1,80 @@
+/* Custom CSS for AniMo My Activity Page */
+
+/* Section headers for My Listings, My Orders, My Transactions */
+.section-header-bg {
+    background-color: #37833a; /* Dark green matching navbar */
+    color: white;
+    font-weight: 600; /* Semi-bold */
+    padding: 0.75rem 1.5rem; /* py-3 px-6 */
+    border-top-left-radius: 1rem; /* rounded-t-2xl */
+    border-top-right-radius: 1rem; /* rounded-t-2xl */
+    font-size: 1.25rem; /* text-xl */
+    margin-bottom: 1.5rem; /* mb-6 */
+    display: flex; /* Use flex to align content if needed */
+    align-items: center;
+}
+
+/* Product cards within My Listings */
+.product-card {
+    background-color: white;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+    border: 1px solid #e2e8f0; /* border-gray-200 */
+    padding: 1rem; /* p-4 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.product-card img {
+    width: 6rem; /* w-24 (96px) */
+    height: 6rem; /* h-24 (96px) */
+    object-fit: cover;
+    border-radius: 0.5rem; /* rounded-lg */
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+/* Table styling for My Orders and My Transactions */
+.activity-table-header {
+    background-color: #4CAF50; /* A medium green for table headers */
+    color: white;
+    font-weight: 600; /* Semi-bold */
+}
+
+.activity-table-header th {
+    padding: 0.75rem 1rem; /* py-3 px-4 */
+    text-align: left;
+    font-weight: 600; /* font-semibold */
+}
+
+/* Table body rows */
+.min-w-full tbody tr {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.min-w-full tbody tr:hover {
+    background-color: #f9fafb; /* Light hover effect for rows */
+}
+
+.min-w-full tbody td {
+    padding: 0.75rem 1rem; /* py-3 px-4 */
+    border-bottom: 1px solid #e2e8f0; /* border-b border-gray-200 */
+}
+
+/* Styling for filter inputs and buttons */
+input[type="text"],
+select {
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 0.5rem 0.75rem; /* p-2 */
+    font-size: 0.875rem; /* text-sm */
+    color: #374151; /* text-gray-700 */
+}
+
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: #34D399; /* focus:ring-green-500 */
+    box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.2); /* focus:ring-2 focus:ring-green-500 */
+}

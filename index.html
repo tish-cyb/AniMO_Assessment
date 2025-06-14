@@ -3,23 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AniMo - Your Agri-Partner</title>
+    <title>AniMoPH - Your Agri-Partner</title>
+    <!-- Favicon (optional, but good practice) -->
+    <link rel="icon" href="https://placehold.co/32x32/37833a/fff?text=AM" type="image/png">
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Poppins Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f0f2f5; /* Light grey background */
-            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        .page-content-container {
-            /* Adjusted padding-top to precisely account for the fixed nav bar's new, slim height */
-            padding-top: 64px; /* Calculated: Logo height (64px) + py-0 (0px padding) = 64px */
-            min-height: calc(100vh - 64px - 140px); /* Recalculate based on new nav height and footer height */
+        /* Fixed navigation bar styling */
+        .fixed-navbar {
+            background-color: #37833a; /* Deep green */
+            color: white;
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50; /* Ensure it's above page content but below modals */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            height: 64px; /* Ensure a consistent height for the navbar */
         }
-
-        /* Modal Styles (global as it can be triggered from anywhere, though tied to Marketplace logic) */
+        /* Main content area to push below the fixed navbar */
+        #page-content-container {
+            flex-grow: 1; /* Allows content to take up available space */
+            padding-top: 64px; /* Exactly match navbar height */
+            /* The min-height for pages is better defined in their own fragments or handled dynamically,
+                but if you need a fallback here: */
+            min-height: calc(100vh - 64px - 140px); /* Adjust based on navbar height and footer height */
+        }
+        .nav-link.active, .nav-popup-link.active {
+            font-weight: bold;
+            color: #d1fae5; /* A lighter green for active state */
+        }
+        /* Basic styling for modals */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -30,42 +61,69 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 100;
+            z-index: 1000; /* Higher z-index to ensure it's on top */
             overflow-y: auto; /* Allow scrolling for modal content if it overflows */
         }
-        .modal-content {
+        .modal-content-wrapper {
             background-color: #fff;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 90%;
-            width: 400px;
-            text-align: center;
-            position: relative;
+            border-radius: 1.5rem; /* rounded-3xl */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            width: 100%;
+            max-width: 28rem; /* max-w-md, common for forms */
+            overflow: hidden; /* Ensure rounded corners clip content */
+            position: relative; /* For close button positioning */
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh; /* Limit height for scrollability on smaller screens */
+        }
+        /* Specific max-width for the checkout process to make it wider */
+        #app-modal-content.checkout-modal-width {
+            max-width: 32rem; /* Wider for checkout */
         }
         .modal-close-btn {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
+            top: 0.75rem; /* ~12px */
+            right: 0.75rem; /* ~12px */
+            font-size: 1.75rem; /* ~28px */
             cursor: pointer;
-            color: #888;
+            color: #a0a0a0; /* Light gray */
+            z-index: 10; /* Ensure it's above injected content */
+            padding: 0.5rem;
+            line-height: 1;
+            background: none;
+            border: none;
+            border-radius: 50%;
+            transition: color 0.2s ease, background-color 0.2s ease;
         }
-        .hidden {
+        .modal-close-btn:hover {
+            color: #888;
+            background-color: #f0f0f0;
+        }
+        .modal-body {
+            /* This will be the scrollable area if content overflows */
+            overflow-y: auto;
+            flex-grow: 1; /* Allow content to grow and take space */
+            padding: 0; /* Content inside the fragment will add its own padding */
+        }
+        .page-section {
+            /* This class will be applied to dynamically loaded page content */
+            min-height: calc(100vh - 64px); /* Adjust based on navbar height, subtracting footer height in main content calculation */
+            padding-bottom: 2rem; /* Example: ensure content doesn't stick to bottom */
+        }
+        /* Styles for the checkout modal content, now directly in index.html */
+        #checkout-process-container .checkout {
+            /* All checkout steps will be hidden by default and managed by JS */
             display: none;
         }
-
-        /* NEW: Styles for the Checkout Modal to ensure it looks good when popped up */
-        #checkout-modal .modal-content {
-            max-width: 90%;
-            width: 500px; /* Adjust width for checkout form */
-            padding: 0; /* No padding directly on modal-content, it's handled by inner divs */
-            text-align: left; /* Align checkout content left */
+        /* Ensure the modal content wrapper has rounded corners for the checkout header */
+        #checkout-process-container #checkout-header {
+            border-radius: 1.5rem 1.5rem 0 0; /* Match modal-content-wrapper rounded-3xl top corners */
         }
     </style>
 </head>
 <body class="antialiased">
-    <nav class="w-full bg-green-700 text-white py-0 px-4 flex justify-between items-center fixed top-0 left-0 z-20 shadow-md">
+    <!-- Top Navigation Bar -->
+    <nav class="fixed-navbar">
         <div class="flex items-center space-x-2">
             <!-- AniMo Logo - Corrected src to use images/AniMo_LOGO.png consistent with file structure -->
             <img src="images/AniMo_LOGO.png" alt="AniMo Logo" class="w-24 h-16 object-contain">
@@ -88,7 +146,8 @@
             <div id="profile-popup-menu" class="absolute hidden bg-white rounded-lg shadow-xl py-2 w-48 right-0 top-full mt-2 z-30">
                 <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="profile">Profile</a>
                 <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="my-activity">My Activity</a>
-                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="govt-updates">Gov't Updates</a>
+                <!-- Corrected data-target to match script.js's pageMap for 'government-updates' -->
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="government-updates">Gov't Updates</a>
                 <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="animo-services">AniMo Services</a>
                 <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="learning-hub">Learning Hub / Guides</a>
                 <hr class="my-1 border-gray-200">
@@ -97,85 +156,295 @@
         </div>
     </nav>
 
+    <!-- Main content container where pages are loaded -->
     <div id="page-content-container" class="page-content-container">
         <!-- Content of individual pages will be loaded here by JavaScript -->
     </div>
 
-    <!-- Login/Signup Modal -->
-    <div id="login-signup-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <span class="modal-close-btn" id="close-modal">&times;</span>
-            <h2 class="text-2xl font-bold mb-4 text-green-700">Welcome to AniMo!</h2>
-            <p class="text-gray-700 mb-6">Please log in or sign up to continue.</p>
+    <!-- Generic Modal Structure (for Login/Signup and Checkout) -->
+    <div id="app-modal" class="modal-overlay hidden">
+        <div id="app-modal-content" class="modal-content-wrapper">
+            <button id="close-app-modal" class="modal-close-btn">&times;</button>
+            <div id="app-modal-body" class="modal-body">
+                <!-- Authentication Forms Container -->
+                <div id="auth-forms-container" class="modal-view-container p-8 text-center relative">
+                    <!-- Message box for Forgot Password / Learn More RSBSA -->
+                    <div id="auth-message-box" class="hidden p-4 mb-4 text-sm rounded-lg text-left" role="alert"></div>
 
-            <div id="login-form">
-                <h3 class="text-xl font-semibold mb-3">Log Into your Account</h3>
-                <!-- Changed input type from email to text for RSBSA ID Number -->
-                <input type="text" placeholder="RSBSA ID Number:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
-                <div class="relative w-full mb-4">
-                    <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
-                    <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
-                </div>
-                <a href="#" class="text-sm text-green-600 hover:underline mb-6 block" id="forgot-password">Forgot Password?</a>
-                <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 login-btn">
-                    Log In
-                </button>
-                <p class="text-sm text-gray-700 mt-4">You are not a member? <a href="#" class="text-green-600 hover:underline" id="show-signup">SIGN UP</a></p>
-            </div>
+                    <h2 class="text-2xl font-bold mb-4 text-green-600">Welcome to AniMo!</h2>
+                    <p class="text-gray-700 mb-6">Please log in or sign up to continue.</p>
 
-            <div id="signup-form" class="hidden">
-                <h3 class="text-xl font-semibold mb-3">Create your Account</h3>
-                <input type="text" placeholder="Full Name:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
-                <!-- Added RSBSA ID Number input to signup form -->
-                <input type="text" placeholder="RSBSA ID Number:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
-                <div class="relative w-full mb-3">
-                    <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
-                    <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
-                </div>
-                <div class="relative w-full mb-4">
-                    <input type="password" placeholder="Confirm Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
-                    <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
-                </div>
-                <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 signup-btn">
-                    Sign Up
-                </button>
-                <p class="text-sm text-gray-700 mt-4">Already a member? <a href="#" class="text-green-600 hover:underline" id="show-login">LOG IN</a></p>
-            </div>
+                    <!-- Role Selection Form - Initially visible for authentication flow -->
+                    <div id="role-selection">
+                        <h3 class="text-xl font-semibold mb-4">How do you want to use AniMo?</h3>
+                        <button class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 mb-3" id="select-farmer-role">
+                            Continue as Farmer/Seller
+                        </button>
+                        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105" id="select-buyer-role">
+                            Continue as Buyer
+                        </button>
+                    </div>
 
-            <div id="role-selection" class="hidden">
-                <h3 class="text-xl font-semibold mb-4">How do you want to use AniMo?</h3>
-                <button class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 mb-3" id="select-farmer-role">
-                    Continue as Farmer/Seller
-                </button>
-                <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105" id="select-buyer-role">
-                    Continue as Buyer
-                </button>
-            </div>
-            <!-- RSBSA Login Form -->
-            <div id="rsbsa-login-form" class="hidden">
-                <h3 class="text-xl font-semibold mb-3">Farmer Login (RSBSA)</h3>
-                <input type="text" placeholder="RSBSA ID Number:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
-                <div class="relative w-full mb-4">
-                    <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10">
-                    <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
-                </div>
-                <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 rsbsa-login-btn">
-                    Log In with RSBSA
-                </button>
-                <p class="text-sm text-gray-700 mt-4">
-                    Don't have an RSBSA ID? <a href="#" class="text-green-600 hover:underline" id="learn-more-rsbsa">Learn More</a>
-                </p>
-            </div>
-        </div>
-    </div>
+                    <!-- Buyer Login Form (hidden by default, shown after "Continue as Buyer") -->
+                    <div id="login-form" class="hidden">
+                        <h3 class="text-xl font-semibold mb-3">Log Into your Account</h3>
+                        <input type="email" placeholder="Email Address:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                        <div class="relative w-full mb-4">
+                            <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10" id="login-password">
+                            <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+                        </div>
+                        <a href="#" class="text-sm text-green-600 hover:underline mb-6 block" id="forgot-password">Forgot Password?</a>
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 login-btn">
+                            Log In
+                        </button>
+                        <p class="text-sm text-gray-700 mt-4">You are not a member? <a href="#" class="text-green-600 hover:underline" id="show-signup">SIGN UP</a></p>
+                    </div>
 
-    <!-- NEW: Checkout Process Modal -->
-    <div id="checkout-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <!-- Content of checkoutProcess.html will be loaded here -->
-            <span class="modal-close-btn" id="close-checkout-modal">&times;</span>
-            <div id="checkout-modal-content-area" class="w-full h-full">
-                <!-- checkoutProcess.html content will be injected here -->
+                    <!-- Buyer Signup Form (hidden by default, shown from "SIGN UP" link in login) -->
+                    <div id="signup-form" class="hidden">
+                        <h3 class="text-xl font-semibold mb-3">Create your Account</h3>
+                        <input type="text" placeholder="Full Name:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                        <input type="email" placeholder="Email Address:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                        <div class="relative w-full mb-3">
+                            <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10" id="signup-password">
+                            <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+                        </div>
+                        <div class="relative w-full mb-4">
+                            <input type="password" placeholder="Confirm Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10" id="signup-confirm-password">
+                            <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+                        </div>
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 signup-btn">
+                            Sign Up
+                        </button>
+                        <p class="text-sm text-gray-700 mt-4">Already a member? <a href="#" class="text-green-600 hover:underline" id="show-login">LOG IN</a></p>
+                    </div>
+
+                    <!-- Farmer Login Form (hidden by default, shown after "Continue as Farmer/Seller") -->
+                    <div id="rsbsa-login-form" class="hidden">
+                        <h3 class="text-xl font-semibold mb-3">Farmer Login (RSBSA)</h3>
+                        <input type="text" placeholder="RSBSA ID Number:" class="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                        <div class="relative w-full mb-4">
+                            <input type="password" placeholder="Password:" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 pr-10" id="rsbsa-password">
+                            <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+                        </div>
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 rsbsa-login-btn">
+                            Log In with RSBSA
+                        </button>
+                        <p class="text-sm text-gray-700 mt-4">
+                            Don't have an RSBSA ID? <a href="#" class="text-green-600 hover:underline" id="learn-more-rsbsa">Learn More</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Checkout Process Container -->
+                <div id="checkout-process-container" class="modal-view-container w-full overflow-y-auto hidden">
+                    <!-- Dynamic Header Section -->
+                    <div id="checkout-header" class="bg-gradient-to-r from-green-500 to-green-600 p-4 text-white flex items-center justify-between relative">
+                        <!-- Back arrow for cart step -->
+                        <button id="cart-back-arrow" class="text-white text-xl p-1 rounded-full hover:bg-green-700 transition-colors hidden">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <h1 class="text-xl font-semibold flex-1 text-center"></h1>
+                        <span id="items-count" class="bg-white text-green-700 px-3 py-1 rounded-full text-sm font-medium hidden">0 Items</span>
+                    </div>
+
+                    <!-- Dynamic Progress Steps Section -->
+                    <div class="flex justify-around items-center p-4 bg-gray-50 border-b border-gray-100">
+                        <div id="cart-step" class="flex flex-col items-center text-gray-400 transition-colors duration-300">
+                            <i class="fas fa-shopping-cart text-2xl mb-1"></i>
+                            <span class="text-xs font-medium">Cart</span>
+                        </div>
+                        <div id="cart-address-line" class="flex-1 border-t-2 border-gray-300 mx-2 transition-colors duration-300"></div>
+                        <div id="address-step" class="flex flex-col items-center text-gray-400 transition-colors duration-300">
+                            <i class="fas fa-map-marker-alt text-2xl mb-1"></i>
+                            <span class="text-xs font-medium">Address</span>
+                        </div>
+                        <div id="address-summary-line" class="flex-1 border-t-2 border-gray-300 mx-2 transition-colors duration-300"></div>
+                        <div id="summary-step" class="flex flex-col items-center text-gray-400 transition-colors duration-300">
+                            <i class="fas fa-file-invoice-dollar text-2xl mb-1"></i>
+                            <span class="text-xs font-medium">Summary</span>
+                        </div>
+                        <div id="summary-payment-line" class="flex-1 border-t-2 border-gray-300 mx-2 transition-colors duration-300"></div>
+                        <div id="payment-step" class="flex flex-col items-center text-gray-400 transition-colors duration-300">
+                            <i class="fas fa-credit-card text-2xl mb-1"></i>
+                            <span class="text-xs font-medium">Payment</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 0: Shopping Cart -->
+                    <div class="checkout" id="step0">
+                        <!-- Store Name Section -->
+                        <div class="p-4 flex items-center space-x-3 bg-gray-50 border-b border-gray-100">
+                            <!-- AniMo Logo Placeholder -->
+                            <img src="https://placehold.co/40x40/C4E0C1/000?text=AniMo" alt="AniMo Logo" class="w-10 h-10 rounded-full object-cover">
+                            <h2 class="text-xl font-semibold text-gray-800">AniMo Vegetables</h2>
+                        </div>
+
+                        <!-- Cart Items Section - Will be dynamically populated -->
+                        <div id="cart-items-container" class="p-4 space-y-4">
+                            <!-- Product items will be injected here by JavaScript -->
+                        </div>
+
+                        <!-- Order Summary Section -->
+                        <div class="p-4 bg-gray-50 rounded-b-3xl">
+                            <div class="flex justify-between items-center text-gray-700 text-sm mb-2">
+                                <span>SUB Total :</span>
+                                <span id="sub-total-display">₱ 0.00</span>
+                            </div>
+                            <div class="flex justify-between items-center text-gray-700 text-sm mb-4">
+                                <span>Delivery Charges :</span>
+                                <span id="delivery-charges-display">₱ 50.00</span>
+                            </div>
+                            <div class="flex justify-between items-center text-green-700 font-bold text-lg mb-6">
+                                <span>Order Total :</span>
+                                <span id="order-total-display">₱ 0.00</span>
+                            </div>
+
+                            <!-- Secure Checkout Button -->
+                            <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 continue-btn">
+                                Secure Checkout
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Address Selection -->
+                    <div class="checkout" id="step1">
+                        <div class="p-4 space-y-4 bg-gray-100">
+                            <!-- Current Address Display (Common to all steps) -->
+                            <div class="relative bg-white rounded-xl shadow-lg p-4 border-2 border-green-500">
+                                <div class="absolute top-3 right-3 text-green-500">
+                                    <i class="fas fa-check-circle text-xl"></i>
+                                </div>
+                                <p class="font-semibold text-gray-900 mb-1">Abdul Salsal</p>
+                                <p class="text-sm text-gray-600">Metro Manila, Philippines</p>
+                                <p class="text-sm text-gray-600">1839</p>
+                                <p class="text-sm text-gray-600 mb-3">+68 900909090</p>
+                                <div class="flex justify-end">
+                                    <button class="text-blue-500 hover:text-blue-600 text-sm font-medium change-address-btn">Change</button>
+                                </div>
+                            </div>
+
+                            <!-- Address Selection Options -->
+                            <div class="content space-y-4">
+                                <div class="address-card bg-white rounded-xl shadow-md p-4 border border-gray-200 transition-all duration-300 ease-in-out cursor-pointer hover:scale-[1.02] active" data-address-type="work">
+                                    <div class="flex items-center space-x-3 mb-2 text-gray-800">
+                                        <i class="fas fa-building text-xl"></i>
+                                        <h3 class="font-semibold text-lg">WORK</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-800 font-medium">ABDUL SAL SAL</p>
+                                    <p class="text-sm text-gray-600">+68 90 03243295</p>
+                                    <p class="text-sm text-gray-600">BGC , TAGUIG CITY PHILIPPINES</p>
+                                </div>
+                                <div class="address-card bg-white rounded-xl shadow-md p-4 border border-gray-200 transition-all duration-300 ease-in-out cursor-pointer hover:scale-[1.02]" data-address-type="home">
+                                    <div class="flex items-center space-x-3 mb-2 text-gray-800">
+                                        <i class="fas fa-home text-xl"></i>
+                                        <h3 class="font-semibold text-lg">HOME</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-800 font-medium">ABDUL SAL SAL</p>
+                                    <p class="text-sm text-gray-600">+68 90 03243295</p>
+                                    <p class="text-sm text-gray-600">LAGUNA, PHILIPPINES</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons for Step 1 -->
+                        <div class="p-4 bg-white rounded-b-3xl flex justify-between space-x-4">
+                            <button class="back-btn flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                                Back
+                            </button>
+                            <button class="continue-btn flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Order Summary -->
+                    <div class="checkout" id="step2">
+                        <div class="p-4 space-y-4 bg-gray-100">
+                            <!-- Current Address Display -->
+                            <div class="relative bg-white rounded-xl shadow-lg p-4 border-2 border-green-500">
+                                <div class="absolute top-3 right-3 text-green-500">
+                                    <i class="fas fa-check-circle text-xl"></i>
+                                </div>
+                                <p class="font-semibold text-gray-900 mb-1">Abdul Salsal</p>
+                                <p class="text-sm text-gray-600">Metro Manila, Philippines</p>
+                                <p class="text-sm text-gray-600">1839</p>
+                                <p class="text-sm text-gray-600 mb-3">+68 900909090</p>
+                                <div class="flex justify-end">
+                                    <button class="text-blue-500 hover:text-blue-600 text-sm font-medium change-address-btn">Change</button>
+                                </div>
+                            </div>
+
+                            <!-- Product Summary Section - Will be dynamically populated -->
+                            <div id="summary-items-container" class="item-container bg-white rounded-xl shadow-md overflow-hidden">
+                                <!-- Product items will be injected here by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Buttons for Step 2 -->
+                        <div class="p-4 bg-white rounded-b-3xl flex justify-between space-x-4">
+                            <button class="back-btn flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                                Back
+                            </button>
+                            <button class="continue-btn flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                                Payment
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Payment Options -->
+                    <div class="checkout" id="step3">
+                        <div class="p-4 space-y-4 bg-gray-100">
+                            <!-- Current Address Display -->
+                            <div class="relative bg-white rounded-xl shadow-lg p-4 border-2 border-green-500">
+                                <div class="absolute top-3 right-3 text-green-500">
+                                    <i class="fas fa-check-circle text-xl"></i>
+                                </div>
+                                <p class="font-semibold text-gray-900 mb-1">Abdul Salsal</p>
+                                <p class="text-sm text-gray-600">Metro Manila, Philippines</p>
+                                <p class="text-sm text-gray-600">1839</p>
+                                <p class="text-sm text-gray-600 mb-3">+68 900909090</p>
+                                <div class="flex justify-end">
+                                    <button class="text-blue-500 hover:text-blue-600 text-sm font-medium change-address-btn">Change</button>
+                                </div>
+                            </div>
+
+                            <!-- Payment Options -->
+                            <div class="content space-y-4">
+                                <div class="payment-option-card bg-white rounded-xl shadow-md p-4 border border-gray-200 transition-all duration-300 ease-in-out cursor-pointer hover:scale-[1.02]" data-payment-type="cod">
+                                    <div class="flex items-center space-x-3 mb-1 text-gray-800">
+                                        <i class="fas fa-truck text-xl"></i>
+                                        <h3 class="font-semibold text-lg">Cash On Delivery</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600">Additional 20 Charges for COD services</p>
+                                </div>
+                                <div class="payment-option-card bg-white rounded-xl shadow-md p-4 border border-gray-200 transition-all duration-300 ease-in-out cursor-pointer hover:scale-[1.02]" data-payment-type="credit">
+                                    <div class="flex items-center space-x-3 mb-1 text-gray-800">
+                                        <i class="fas fa-credit-card text-xl"></i>
+                                        <h3 class="font-semibold text-lg">CREDIT CARD</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-900 font-medium">ABDUL SAL SAL</p>
+                                    <p class="text-sm text-gray-700">+68 90 03898***</p>
+                                </div>
+                            </div>
+
+                            <!-- Promo Code Section -->
+                            <div class="p-2 text-gray-700">
+                                <p>Do you have a promo code?</p>
+                            </div>
+                        </div>
+
+                        <!-- Buttons for Step 3 -->
+                        <div class="p-4 bg-white rounded-b-3xl flex justify-between space-x-4">
+                            <button class="back-btn flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                                Back
+                            </button>
+                            <button class="checkout-btn flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                                Place Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -199,6 +468,7 @@
         <p class="text-xs">Copyright &copy; 2025 AniMoPH. All Rights Reserved.</p> <!-- Changed font size to text-xs -->
     </footer>
 
+    <!-- The main JavaScript file for dynamic page loading and global logic -->
     <script src="script.js"></script>
 </body>
 </html>
