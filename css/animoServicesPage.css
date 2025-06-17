@@ -1,0 +1,110 @@
+/* css/servicesPage.css */
+
+#services-page-section {
+    min-height: calc(100vh - 100px); /* Adjust based on your header/footer height */
+}
+
+.service-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* For image overlay */
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.service-card-image {
+    width: 100%;
+    height: 250px; /* Fixed height for consistency */
+    object-fit: cover; /* Ensures the image covers the area, cropping if necessary */
+    filter: brightness(0.8); /* Slightly dim the image */
+    transition: filter 0.3s ease;
+}
+
+.service-card:hover .service-card-image {
+    filter: brightness(0.9); /* Brighten on hover */
+}
+
+.service-card-content {
+    padding: 1.5rem;
+    flex-grow: 1; /* Allows content to take up available space */
+}
+
+.service-card-title {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: bold;
+    color: #166534; /* Green-800 */
+    margin-bottom: 0.75rem;
+}
+
+.service-card-description {
+    font-size: 1rem; /* text-base */
+    color: #4b5563; /* Gray-700 */
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+}
+
+.service-action-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #22c55e; /* Green-500 */
+    color: #ffffff;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    width: fit-content; /* Adjust width to content */
+    margin-top: auto; /* Push button to bottom if content varies */
+}
+
+.service-action-btn:hover {
+    background-color: #16a34a; /* Green-600 */
+}
+
+/* Modal styles (shared with Tailwind classes in HTML, but can be customized here) */
+#service-modal {
+    z-index: 1000; /* Ensure modal is on top of other content */
+}
+
+#service-modal .bg-white {
+    padding: 2.5rem; /* More padding */
+}
+
+#service-modal-title {
+    color: #166534; /* Green-800 */
+}
+
+#close-service-modal {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem;
+}
+
+#service-modal-submit {
+    /* Styles are mostly handled by Tailwind classes in HTML */
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .service-card {
+        flex-direction: row; /* Horizontal layout on larger screens */
+    }
+    .service-card-image {
+        width: 40%; /* Image takes 40% of width */
+        height: auto; /* Height adjusts automatically */
+        min-height: 250px; /* Ensure minimum height */
+        max-height: 300px;
+    }
+    .service-card-content {
+        padding: 2rem;
+        width: 60%; /* Content takes 60% of width */
+    }
+}

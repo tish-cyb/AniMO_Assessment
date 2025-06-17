@@ -1,0 +1,128 @@
+/* learningHubPage.css */
+
+/* General styling for the learning hub page sections */
+#learning-hub-page-section {
+    /* Ensures content doesn't stick to the very top/bottom of the container */
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Styles for video cards and overlays */
+.learning-video-card {
+    position: relative;
+    cursor: pointer;
+    border-radius: 0.75rem; /* Equivalent to Tailwind's rounded-xl */
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.learning-video-card:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Larger shadow on hover */
+}
+
+.learning-video-card img {
+    width: 100%;
+    height: 100%; /* Adjust height as needed, object-cover already set by Tailwind */
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.learning-video-card:hover img {
+    transform: scale(1.05); /* Slight zoom on image on hover */
+}
+
+.learning-video-card .absolute {
+    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.learning-video-card .fa-play-circle {
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.learning-video-card:hover .fa-play-circle {
+    opacity: 1;
+}
+
+/* Styles for the video modal */
+#video-modal {
+    background-color: rgba(0, 0, 0, 0.75); /* Darker overlay */
+    z-index: 9999; /* Ensure it's on top of everything */
+    opacity: 0; /* Start hidden for transition */
+    transition: opacity 0.3s ease-in-out;
+    visibility: hidden; /* Control visibility with JS to allow transitions */
+}
+
+#video-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#video-modal .relative {
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+#video-modal #close-video-modal {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#video-modal #close-video-modal:hover {
+    background-color: rgba(255, 0, 0, 0.7); /* Reddish hover for close */
+}
+
+#video-player-container {
+    position: relative;
+    width: 100%;
+    /* This padding-bottom trick maintains aspect ratio for iframes */
+    padding-bottom: 56.25%; /* 16:9 aspect ratio (height / width = 9 / 16 = 0.5625) */
+    height: 0; /* Required for padding-bottom trick */
+}
+
+#video-player-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Styling for TESDA and General Resources cards */
+.bg-white.rounded-xl.shadow-lg.p-6 {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.bg-white.rounded-xl.shadow-lg.p-6:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Specific button styling (if not fully covered by Tailwind) */
+.seminar-join-btn {
+    transition: all 0.3s ease;
+    background-image: linear-gradient(to right, #34d399, #10b981); /* Green gradient */
+    border: none;
+    cursor: pointer;
+}
+
+.seminar-join-btn:hover {
+    background-image: linear-gradient(to right, #10b981, #059669); /* Darker gradient on hover */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Adjust font sizes for smaller screens if needed */
+@media (max-width: 640px) {
+    .text-3xl { font-size: 2rem; }
+    .text-2xl { font-size: 1.5rem; }
+    .text-xl { font-size: 1.25rem; }
+    .text-lg { font-size: 1rem; }
+}
+

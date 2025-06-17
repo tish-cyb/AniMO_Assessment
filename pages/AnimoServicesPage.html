@@ -1,0 +1,332 @@
+<section id="services-page-section" class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-extrabold text-green-700 leading-tight">SERVICES</h1>
+            <p class="mt-4 text-xl text-gray-700 max-w-3xl mx-auto">
+                AniMo offers a range of services designed to support both farmers and buyers in their agricultural journey. These services include farm equipment rental, access to skilled agri workers, financing assistance, and logistics support to help transport goods efficiently. We also provide farm consultation to improve productivity and digital marketing support to help sellers reach more customers online. All these services aim to make farming easier, reduce costs, boost income, and open more opportunities in the agri-business sector.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="service-card" data-service-type="farm-equipment">
+                <img src="/assets/images/farm_equipment_rental.jpg" alt="Farm Equipment Rental" class="service-card-image">
+                <div class="service-card-content">
+                    <h2 class="service-card-title">Farm Equipment Rental</h2>
+                    <p class="service-card-description">Rent modern machinery without the high cost of ownership.</p>
+                    <button class="service-action-btn">Learn More & Rent</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-service-type="financing">
+                <img src="/assets/images/financing_assistance.jpg" alt="Financing Assistance" class="service-card-image">
+                <div class="service-card-content">
+                    <h2 class="service-card-title">Financing Assistance</h2>
+                    <p class="service-card-description">Access low-interest loans or government grants to boost your operations.</p>
+                    <button class="service-action-btn">Apply Now</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-service-type="logistics-support">
+                <img src="/assets/images/logistics_support.jpg" alt="Logistics Support" class="service-card-image">
+                <div class="service-card-content">
+                    <h2 class="service-card-title">Logistics Support</h2>
+                    <p class="service-card-description">Easily transport your goods from farm to market with trusted logistics.</p>
+                    <button class="service-action-btn">Request Transport</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-service-type="skilled-workers">
+                <img src="/assets/images/skilled_agri_workers.jpg" alt="Skilled Agri Workers" class="service-card-image">
+                <div class="service-card-content">
+                    <h2 class="service-card-title">Skilled Agri Workers</h2>
+                    <p class="service-card-description">Connect with experienced workers to help during planting, harvesting, or daily tasks.</p>
+                    <button class="service-action-btn">Find Workers</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-service-type="digital-marketing">
+                <img src="/assets/images/digital_marketing_support.jpg" alt="Digital Marketing Support" class="service-card-image">
+                <div class="service-card-content">
+                    <h2 class="service-card-title">Digital Marketing Support</h2>
+                    <p class="service-card-description">Promote your produce online and reach more buyers with ease.</p>
+                    <button class="service-action-btn">Get Started</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-service-type="farm-consultation">
+                <img src="/assets/images/farm_consultation.jpg" alt="Farm Consultation" class="service-card-image">
+                <div class="service-card-content">
+                    <h2 class="service-card-title">Farm Consultation</h2>
+                    <p class="service-card-description">Receive expert advice on crop management, soil health, and pest control.</p>
+                    <button class="service-action-btn">Book Consultation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="service-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg relative">
+            <button id="close-service-modal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            <h2 id="service-modal-title" class="text-2xl font-bold mb-4 text-green-700"></h2>
+            <div id="service-modal-content">
+                </div>
+            <div class="mt-6 text-right">
+                <button id="service-modal-submit" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">Submit</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="hidden">
+    <img src="/assets/images/farm_equipment_rental.jpg" alt="Farm Equipment Rental Placeholder">
+    <img src="/assets/images/financing_assistance.jpg" alt="Financing Assistance Placeholder">
+    <img src="/assets/images/logistics_support.jpg" alt="Logistics Support Placeholder">
+    <img src="/assets/images/skilled_agri_workers.jpg" alt="Skilled Agri Workers Placeholder">
+    <img src="/assets/images/digital_marketing_support.jpg" alt="Digital Marketing Support Placeholder">
+    <img src="/assets/images/farm_consultation.jpg" alt="Farm Consultation Placeholder">
+</div>
+
+<script>
+    // This script block is specific to ServicesPage.html
+    // It will be executed when ServicesPage.html is loaded by loadPage() in script.js
+    // It's here because these listeners need to be attached *after* the HTML elements are in the DOM.
+
+    function attachServicesPageListeners() {
+        console.log("[ServicesPage.html] Attaching listeners for service cards.");
+        const serviceCards = document.querySelectorAll('.service-card');
+        const serviceModal = document.getElementById('service-modal');
+        const closeServiceModalBtn = document.getElementById('close-service-modal');
+        const serviceModalTitle = document.getElementById('service-modal-title');
+        const serviceModalContent = document.getElementById('service-modal-content');
+        const serviceModalSubmitBtn = document.getElementById('service-modal-submit');
+
+
+        serviceCards.forEach(card => {
+            // Re-attach listeners to prevent duplicates after potential re-loading
+            const oldCard = card;
+            const newCard = oldCard.cloneNode(true);
+            oldCard.parentNode.replaceChild(newCard, oldCard);
+
+            newCard.addEventListener('click', (event) => {
+                const serviceType = newCard.dataset.serviceType;
+                console.log(`Service card clicked: ${serviceType}`);
+                let title = '';
+                let content = '';
+
+                // Dynamically generate modal content based on service type
+                switch (serviceType) {
+                    case 'farm-equipment':
+                        title = 'Farm Equipment Rental';
+                        content = `
+                            <p class="mb-4 text-gray-700">Please fill out the form to request farm equipment rental. Our team will contact you to confirm availability and pricing.</p>
+                            <form id="farm-equipment-form">
+                                <div class="mb-4">
+                                    <label for="equipment-type" class="block text-gray-700 text-sm font-bold mb-2">Equipment Type:</label>
+                                    <select id="equipment-type" name="equipmentType" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                        <option value="">Select Equipment</option>
+                                        <option value="tractor">Tractor</option>
+                                        <option value="plow">Plow</option>
+                                        <option value="harvester">Harvester</option>
+                                        <option value="seeder">Seeder</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="rental-duration" class="block text-gray-700 text-sm font-bold mb-2">Rental Duration (days):</label>
+                                    <input type="number" id="rental-duration" name="rentalDuration" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="rental-date" class="block text-gray-700 text-sm font-bold mb-2">Desired Start Date:</label>
+                                    <input type="date" id="rental-date" name="rentalDate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="contact-person-equipment" class="block text-gray-700 text-sm font-bold mb-2">Contact Person:</label>
+                                    <input type="text" id="contact-person-equipment" name="contactPerson" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="contact-number-equipment" class="block text-gray-700 text-sm font-bold mb-2">Contact Number:</label>
+                                    <input type="tel" id="contact-number-equipment" name="contactNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                            </form>
+                        `;
+                        break;
+                    case 'financing':
+                        title = 'Financing Assistance Application';
+                        content = `
+                            <p class="mb-4 text-gray-700">Fill out this application to inquire about financing options. Our finance partners will review your eligibility.</p>
+                            <form id="financing-form">
+                                <div class="mb-4">
+                                    <label for="loan-amount" class="block text-gray-700 text-sm font-bold mb-2">Desired Loan Amount (₱):</label>
+                                    <input type="number" id="loan-amount" name="loanAmount" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1000" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="purpose" class="block text-gray-700 text-sm font-bold mb-2">Purpose of Loan:</label>
+                                    <textarea id="purpose" name="purpose" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-24" required></textarea>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="annual-income" class="block text-gray-700 text-sm font-bold mb-2">Estimated Annual Income (₱):</label>
+                                    <input type="number" id="annual-income" name="annualIncome" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="contact-person-financing" class="block text-gray-700 text-sm font-bold mb-2">Contact Person:</label>
+                                    <input type="text" id="contact-person-financing" name="contactPerson" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="contact-number-financing" class="block text-gray-700 text-sm font-bold mb-2">Contact Number:</label>
+                                    <input type="tel" id="contact-number-financing" name="contactNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                            </form>
+                        `;
+                        break;
+                    case 'logistics-support':
+                        title = 'Logistics Support Request';
+                        content = `
+                            <p class="mb-4 text-gray-700">Request transport services for your agricultural products. Provide details below, and our logistics team will get in touch.</p>
+                            <form id="logistics-form">
+                                <div class="mb-4">
+                                    <label for="item-type" class="block text-gray-700 text-sm font-bold mb-2">Item Type:</label>
+                                    <input type="text" id="item-type" name="itemType" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="weight" class="block text-gray-700 text-sm font-bold mb-2">Estimated Weight (kg):</label>
+                                    <input type="number" id="weight" name="weight" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="pickup-address" class="block text-gray-700 text-sm font-bold mb-2">Pickup Address:</label>
+                                    <input type="text" id="pickup-address" name="pickupAddress" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="delivery-address" class="block text-gray-700 text-sm font-bold mb-2">Delivery Address:</label>
+                                    <input type="text" id="delivery-address" name="deliveryAddress" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="preferred-date" class="block text-gray-700 text-sm font-bold mb-2">Preferred Delivery Date:</label>
+                                    <input type="date" id="preferred-date" name="preferredDate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                            </form>
+                        `;
+                        break;
+                    case 'skilled-workers':
+                        title = 'Skilled Agri Workers Request';
+                        content = `
+                            <p class="mb-4 text-gray-700">Describe the type of work and number of skilled workers you need. We'll connect you with available talent.</p>
+                            <form id="workers-form">
+                                <div class="mb-4">
+                                    <label for="work-type" class="block text-gray-700 text-sm font-bold mb-2">Type of Work:</label>
+                                    <input type="text" id="work-type" name="workType" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="num-workers" class="block text-gray-700 text-sm font-bold mb-2">Number of Workers:</label>
+                                    <input type="number" id="num-workers" name="numWorkers" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="duration-workers" class="block text-gray-700 text-sm font-bold mb-2">Duration (days/weeks):</label>
+                                    <input type="text" id="duration-workers" name="durationWorkers" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="start-date-workers" class="block text-gray-700 text-sm font-bold mb-2">Desired Start Date:</label>
+                                    <input type="date" id="start-date-workers" name="startDateWorkers" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                            </form>
+                        `;
+                        break;
+                    case 'digital-marketing':
+                        title = 'Digital Marketing Services';
+                        content = `
+                            <p class="mb-4 text-gray-700">Boost your online presence! Tell us about your products and marketing goals, and we'll propose a strategy.</p>
+                            <form id="marketing-form">
+                                <div class="mb-4">
+                                    <label for="product-category" class="block text-gray-700 text-sm font-bold mb-2">Product Category:</label>
+                                    <input type="text" id="product-category" name="productCategory" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="marketing-goals" class="block text-gray-700 text-sm font-bold mb-2">Marketing Goals (e.g., more sales, brand awareness):</label>
+                                    <textarea id="marketing-goals" name="marketingGoals" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-24" required></textarea>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="website-link" class="block text-gray-700 text-sm font-bold mb-2">Existing Website/Social Media Link (Optional):</label>
+                                    <input type="url" id="website-link" name="websiteLink" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                </div>
+                            </form>
+                        `;
+                        break;
+                    case 'farm-consultation':
+                        title = 'Farm Consultation Request';
+                        content = `
+                            <p class="mb-4 text-gray-700">Schedule a consultation with our agricultural experts. Provide details about your farm and the issues you're facing.</p>
+                            <form id="consultation-form">
+                                <div class="mb-4">
+                                    <label for="farm-size" class="block text-gray-700 text-sm font-bold mb-2">Farm Size (hectares):</label>
+                                    <input type="number" id="farm-size" name="farmSize" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="0.1" step="0.1" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="main-crops" class="block text-gray-700 text-sm font-bold mb-2">Main Crops/Livestock:</label>
+                                    <input type="text" id="main-crops" name="mainCrops" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="consultation-topic" class="block text-gray-700 text-sm font-bold mb-2">Consultation Topic (e.g., pest control, soil health, crop rotation):</label>
+                                    <textarea id="consultation-topic" name="consultationTopic" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-24" required></textarea>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="preferred-consultation-date" class="block text-gray-700 text-sm font-bold mb-2">Preferred Date:</label>
+                                    <input type="date" id="preferred-consultation-date" name="preferredConsultationDate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                </div>
+                            </form>
+                        `;
+                        break;
+                    default:
+                        title = 'Service Details';
+                        content = '<p>Details for this service are not yet available. Please check back later or contact us directly.</p>';
+                }
+
+                serviceModalTitle.textContent = title;
+                serviceModalContent.innerHTML = content;
+                serviceModal.classList.remove('hidden');
+
+                // Add a generic submit listener for the modal
+                // In a real application, you'd send this form data to a backend.
+                // For this example, we'll just log it.
+                // Remove existing listener to prevent duplicates
+                const oldSubmitBtn = serviceModalSubmitBtn;
+                const newSubmitBtn = oldSubmitBtn.cloneNode(true);
+                oldSubmitBtn.parentNode.replaceChild(newSubmitBtn, oldSubmitBtn);
+
+                newSubmitBtn.addEventListener('click', () => {
+                    const formId = serviceType + '-form';
+                    const form = document.getElementById(formId);
+                    if (form && form.checkValidity()) {
+                        const formData = new FormData(form);
+                        const data = {};
+                        for (let [key, value] of formData.entries()) {
+                            data[key] = value;
+                        }
+                        console.log(`Submitting ${serviceType} form data:`, data);
+                        alert(`Thank you for your ${title} request! We will get back to you shortly.`);
+                        serviceModal.classList.add('hidden'); // Close modal on submit
+                    } else if (form) {
+                        form.reportValidity(); // Show native browser validation messages
+                        console.warn(`Form validation failed for ${serviceType} form.`);
+                    } else {
+                        alert("No form to submit for this service.");
+                        serviceModal.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        if (closeServiceModalBtn) {
+            // Re-attach listener
+            const oldCloseBtn = closeServiceModalBtn;
+            const newCloseBtn = oldCloseBtn.cloneNode(true);
+            oldCloseBtn.parentNode.replaceChild(newCloseBtn, oldCloseBtn);
+            newCloseBtn.addEventListener('click', () => {
+                serviceModal.classList.add('hidden');
+            });
+        }
+    }
+
+    // When the ServicesPage.html content is loaded and this script runs
+    document.addEventListener('DOMContentLoaded', attachServicesPageListeners); // This might not trigger if loaded via innerHTML
+    // A better way is to call this function from script.js's executePageSpecificJS
+    // window.attachServicesPageListeners = attachServicesPageListeners; // Expose globally for script.js
+</script>
