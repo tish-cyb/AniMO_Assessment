@@ -65,122 +65,44 @@ function correctImageSources(container) {
  * @param {string} pageId - The ID of the page to load (e.g., 'home', 'marketplace').
  */
 async function loadPage(pageId) {
-    console.log(`[loadPage] Attempting to load page: ${pageId}`);
-    let targetPageId = pageId;
+    // Hide all page sections
+    document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.add('hidden');
+        section.innerHTML = ''; // Optional: clear previous content
+    });
 
-    let pageUrl = pageMap[targetPageId];
-    let cssUrl = cssMap[targetPageId];
+    const pageSectionId = `${pageId}-page-section`;
+    const pageSection = document.getElementById(pageSectionId);
+    if (!pageSection) return;
 
-    if (!pageUrl) {
-        console.warn(`[loadPage] Page URL not found in pageMap for ID: ${pageId}. Falling back to 'home'.`);
-        targetPageId = 'home';
-        pageUrl = pageMap[targetPageId];
-        cssUrl = cssMap[targetPageId];
-        if (!pageUrl) {
-             console.error(`[loadPage] Critical Error: 'home' page also not configured.`);
-             pageContentContainer.innerHTML = `<div class="text-center text-red-500 py-20">Critical Error: Main navigation pages are not configured.</div>`;
-             return;
-        }
-    }
-
+    // Fetch the HTML content for the page
     try {
-        // 1. Remove previous page's CSS if it exists and is different
-        console.log(`[loadPage] Current loaded CSS: ${currentLoadedCss}, New CSS: ${cssUrl}`);
-        if (currentLoadedCss && currentLoadedCss !== cssUrl) {
-            const oldLink = document.querySelector(`link[href="${currentLoadedCss}"]`);
-            if (oldLink) {
-                oldLink.remove();
-                console.log(`[loadPage] Removed old CSS: ${currentLoadedCss}`);
-            }
-        }
+        const response = await fetch(pageMap[pageId]);
+        if (!response.ok) throw new Error('Page not found');
+        const html = await response.text();
 
-        // 2. Load new page's CSS if it exists and is not already loaded
-        if (cssUrl && currentLoadedCss !== cssUrl) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = cssUrl;
-            link.onload = () => console.log(`[loadPage] Successfully loaded CSS: ${cssUrl}`);
-            link.onerror = (e) => console.error(`[loadPage] Failed to load CSS: ${cssUrl}. Check path and MIME type.`, e);
-            document.head.prepend(link);
-            currentLoadedCss = cssUrl;
-        } else if (!cssUrl) {
-            currentLoadedCss = null;
-            console.log(`[loadPage] No specific CSS for page: ${targetPageId}`);
-        }
-
-        // 3. Fetch and load page HTML
-        console.log(`[loadPage] Fetching HTML from: ${pageUrl}`);
-        const response = await fetch(pageUrl);
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`HTTP error! status: ${response.status} for ${pageUrl}. Response body: ${errorText.substring(0, 200)}...`);
-        }
-        let html = await response.text();
-
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-
-        // Correct image sources within the fetched content before injecting
-        correctImageSources(tempDiv);
-
-        // Extract and remove script tags from the loaded content (most JS is in script.js)
-        const scriptsToExecute = Array.from(tempDiv.querySelectorAll('script'));
-        scriptsToExecute.forEach(script => script.remove());
-
-        // Hide all current page sections before loading new content
-        document.querySelectorAll('.page-section').forEach(section => {
-            section.classList.add('hidden');
-            section.classList.remove('active'); // Remove active class
-        });
-
-        // Inject the remaining HTML (without scripts) into the pageContentContainer
-        // Find the specific page-section div within index.html and update its content
-        const targetSection = document.getElementById(`${targetPageId}-page-section`); // Use the new naming convention
-        if (targetSection) {
-            targetSection.innerHTML = tempDiv.innerHTML; // Update content within the existing div
-            targetSection.classList.remove('hidden'); // Show the target section
-            targetSection.classList.add('active'); // Mark as active
-            console.log(`[loadPage] Loaded HTML for page: ${targetPageId} into its existing div.`);
-        } else {
-            // Fallback if the target section is not found (shouldn't happen with updated index.html)
-            pageContentContainer.innerHTML = tempDiv.innerHTML; // Inject directly if no specific section
-            console.warn(`[loadPage] Target section #${targetPageId}-page-section not found in index.html. Injected directly into container.`);
-        }
-
-        // Execute the extracted scripts (if any, though page-specific-listeners handles most)
-        scriptsToExecute.forEach(oldScript => {
-            const newScript = document.createElement('script');
-            Array.from(oldScript.attributes).forEach(attr => {
-                newScript.setAttribute(attr.name, attr.value);
-            });
-            if (oldScript.textContent) {
-                newScript.textContent = oldScript.textContent;
-            }
-            if (oldScript.src) {
-                newScript.src = oldScript.src;
-            }
-            document.body.appendChild(newScript);
-            console.log(`[loadPage] Executing script for ${targetPageId}: ${oldScript.src || 'inline script'}`);
-        });
-
-        // 4. Update active link in navigation
-        document.querySelectorAll('.nav-link, .nav-popup-link').forEach(link => {
-            link.classList.remove('font-bold', 'text-green-200');
-            if (link.dataset.target === pageId) {
-                link.classList.add('font-bold', 'text-green-200');
-            }
-        });
-
-        // 5. Scroll to top of the page when navigating
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        // 6. Execute page-specific JavaScript after HTML is loaded and its scripts run
-        executePageSpecificJS(targetPageId);
-
-    } catch (error) {
-        console.error(`[loadPage] Failed to load page: ${targetPageId}`, error);
-        pageContentContainer.innerHTML = `<div class="text-center text-red-500 py-20">Failed to load ${targetPageId} page. Please check console for errors. Details: ${error.message}</div>`;
+        // Insert as HTML, not text!
+        pageSection.innerHTML = html;
+        pageSection.classList.remove('hidden');
+    } catch (err) {
+        pageSection.innerHTML = `<div class="text-red-600 p-4">Failed to load page: ${err.message}</div>`;
+        pageSection.classList.remove('hidden');
     }
+
+    // Optionally, load associated CSS
+    if (cssMap[pageId]) {
+        if (currentLoadedCss) {
+            currentLoadedCss.remove();
+        }
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = cssMap[pageId];
+        document.head.appendChild(link);
+        currentLoadedCss = link;
+    }
+
+    // Run any page-specific JS
+    executePageSpecificJS(pageId);
 }
 
 /**
@@ -370,15 +292,36 @@ let cartItemsContainer, summaryItemsContainer;
 let checkoutStepsElements; // Initialized in DOMContentLoaded
 let checkoutContinueBtns, checkoutBackBtns, checkoutFinalBtn; // Initialized in DOMContentLoaded
 
-// Checkout Process Logic
+let currentStepIndex = 0;
 const steps = [
     { id: 'step-0-cart', header: 'Your Cart', showItemsCount: true },
     { id: 'step-1-address', header: 'Check Out 1/3', showItemsCount: false },
     { id: 'step-2-summary', header: 'Check Out 2/3', showItemsCount: false },
     { id: 'step-3-payment', header: 'Check Out 3/3', showItemsCount: false }
 ];
-let currentStepIndex = 0;
-let cartItems = [];
+
+function showCheckoutStep(index) {
+    steps.forEach((step, i) => {
+        const el = document.getElementById(step.id);
+        if (el) el.classList.toggle('hidden', i !== index);
+    });
+    currentStepIndex = index;
+}
+
+// Add event listeners to continue buttons
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.checkout-continue-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (currentStepIndex < steps.length - 1) {
+                showCheckoutStep(currentStepIndex + 1);
+            }
+        });
+    });
+    // Optionally, add back button logic here
+    showCheckoutStep(0); // Show first step by default
+});
+
+// Checkout Process Logic
 const DELIVERY_CHARGE = 50.00;
 
 // Custom Message Modal elements
@@ -1410,27 +1353,6 @@ function initLearningHub() {
 
     // Event listener for closing the video modal
     if (closeVideoModalBtn) {
-        // Clone and replace to avoid duplicate listeners
-        const oldBtn = closeVideoModalBtn;
-        const newBtn = oldBtn.cloneNode(true);
-        oldBtn.parentNode.replaceChild(newBtn, oldBtn);
-        newBtn.addEventListener('click', () => {
-            if (youtubeIframe && videoModal) {
-                youtubeIframe.src = ''; // Stop video playback
-                videoModal.classList.remove('active');
-                videoModal.addEventListener('transitionend', function handler() {
-                    videoModal.classList.add('hidden');
-                    videoModal.removeEventListener('transitionend', handler);
-                }, { once: true });
-                document.body.style.overflow = '';
-                console.log("[initLearningHub] Closed video modal.");
-            }
-        });
-    }
-
-    // Close modal if clicking outside the video content
-    if (videoModal) {
-        // Clone and replace to avoid duplicate listeners
         const oldModal = videoModal;
         const newModal = oldModal.cloneNode(true);
         oldModal.parentNode.replaceChild(newModal, oldModal);
