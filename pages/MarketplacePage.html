@@ -292,11 +292,11 @@
                     // Access window.currentUserRole directly, assuming script.js exposes it globally
                     if (window.currentUserRole === 'guest') {
                         // If the user is a guest, show the login/signup modal
-                        if (window.showModalView) {
-                            window.showModalView('login-form');
+                        if (window.showAuthModal) {
+                            window.showAuthModal();
                             console.log("[marketplace.html] Guest user clicked product. Showing login modal.");
                         } else {
-                            console.error("[marketplace.html] window.showModalView is not defined.");
+                            console.error("[marketplace.html] window.showAuthModal is not defined.");
                         }
                     } else {
                         // If user is logged in, prepare product details and start checkout modal
@@ -331,5 +331,7 @@
             // Fallback for slower loading or if script is in head (less common for fragments)
             document.addEventListener('DOMContentLoaded', attachMarketplaceProductListeners);
         }
+
+
     </script>
 </section>

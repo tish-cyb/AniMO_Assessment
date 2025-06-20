@@ -27,38 +27,68 @@
                 <!-- Other static nav links -->
                 <li id="sell-link" class="hidden"><a href="#sell" class="nav-link" data-target="sell">SELL</a></li>
             </ul>
-            <div id="user-icons" class="flex items-center space-x-4 hidden">
-                <i id="cart-icon" class="fas fa-shopping-cart text-xl cursor-pointer"></i>
-                <i id="profile-icon" class="fas fa-user-circle text-xl cursor-pointer"></i>
-                <div id="profile-popup-menu" class="absolute right-4 mt-2 bg-white rounded-lg shadow-lg py-2 w-48 hidden z-20">
-                    <a href="#profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="profile">Profile</a>
-                    <a href="#my-activity" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="my-activity">My Activity</a>
-                    <a href="#government-updates" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="government-updates">Gov't Updates</a>
-                    <a href="#animo-services" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="animo-services">AniMo Services</a>
-                    <a href="#learning-hub" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="learning-hub">Learning Hub / Guides</a>
-                    <div class="border-t border-gray-200 mt-2 pt-2">
-                        <a href="#" class="block px-4 py-2 text-red-600 hover:bg-gray-100 nav-popup-link" data-action="logout">Log Out</a>
-                    </div>
+            <div id="user-icons" class="relative flex items-center space-x-4 hidden">
+                <i id="notif-icon" class="fas fa-bell text-xl cursor-pointer"></i>
+                <div class="relative">
+                 <i id="profile-icon" class="fas fa-user-circle text-xl cursor-pointer"></i>
+                 <!-- Profile Popup Menu -->
+                <div id="profile-popup-menu" class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-2 z-50 hidden">
+                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="profile">Profile</a>
+                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="my-activity">My Activity</a>
+                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="government-updates">Government Updates</a>
+                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 nav-popup-link" data-target="learning-hub">Learning Hub</a>
+                    <div class="border-t my-2"></div>
+                    <a href="#" class="block px-4 py-2 text-red-600 hover:bg-gray-100 nav-popup-link" data-action="logout">Logout</a>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main id="page-content-container" class="flex-1 container mx-auto py-8">
-        <!-- These are the containers for dynamically loaded page content -->
-        <!-- Each of these divs will hold the content of its respective HTML file -->
-        <!-- Initially, all are hidden. script.js will manage their visibility. -->
-        <div id="home-page-section" class="page-section"></div>
-        <div id="about-page-section" class="page-section hidden"></div>
-        <div id="weather-page-section" class="page-section hidden"></div>
-        <div id="loan-page-section" class="page-section hidden"></div>
-        <div id="marketplace-page-section" class="page-section hidden"></div>
-        <div id="sell-page-section" class="page-section hidden"></div>
-        <div id="profile-page-section" class="page-section hidden"></div>
-        <div id="my-activity-page-section" class="page-section hidden"></div>
-        <div id="government-updates-page-section" class="page-section hidden"></div>
-        <div id="animo-services-page-section" class="page-section hidden"></div>
-        <div id="learning-hub-page-section" class="page-section hidden"></div>
+    <main id="page-content-container">
+      <div id="home-page-section" class="page-section">
+        <h1>Welcome to AniMoPH!</h1>
+        <p>This is your home page. If you see this, your navigation works!</p>
+      </div>
+      <div id="about-page-section" class="page-section hidden">
+        <h1>About Us</h1>
+        <p>About page content here.</p>
+      </div>
+      <div id="weather-page-section" class="page-section hidden">
+        <h1>Weather</h1>
+        <p>Weather page content here.</p>
+      </div>
+      <div id="loan-page-section" class="page-section hidden">
+        <h1>Loan</h1>
+        <p>Loan page content here.</p>
+      </div>
+      <div id="marketplace-page-section" class="page-section hidden">
+        <h1>Marketplace</h1>
+        <p>Marketplace page content here.</p>
+      </div>
+      <div id="sell-page-section" class="page-section hidden">
+        <h1>Sell</h1>
+        <p>Sell page content here.</p>
+      </div>
+      <div id="profile-page-section" class="page-section hidden">
+        <h1>Profile</h1>
+        <p>Profile page content here.</p>
+      </div>
+      <div id="my-activity-page-section" class="page-section hidden">
+        <h1>My Activity</h1>
+        <p>My Activity page content here.</p>
+      </div>
+      <div id="government-updates-page-section" class="page-section hidden">
+        <h1>Government Updates</h1>
+        <p>Government updates content here.</p>
+      </div>
+      <div id="animo-services-page-section" class="page-section hidden">
+        <h1>AniMo Services</h1>
+        <p>Services content here.</p>
+      </div>
+      <div id="learning-hub-page-section" class="page-section hidden">
+        <h1>Learning Hub</h1>
+        <p>Learning hub content here.</p>
+      </div>
     </main>
 
     <!-- Your footer will go here -->
@@ -81,257 +111,42 @@
         </div>
     </footer>
 
-    <!-- Universal Modal for Auth and Checkout -->
-    <div id="app-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
-        <div id="app-modal-content" class="bg-white rounded-xl shadow-xl w-full max-w-md mx-auto relative flex flex-col overflow-hidden">
-            <!-- Close button for the modal -->
-            <button id="close-app-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10">
-                <i class="fas fa-times text-2xl"></i>
-            </button>
-            <div id="app-modal-body" class="p-6 flex-grow overflow-y-auto">
-                <!-- Authentication Forms Container -->
-                <div id="auth-forms-container" class="hidden">
-                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Welcome to AniMoPH</h2>
-
-                    <!-- Role Selection -->
-                    <div id="role-selection">
-                        <p class="text-center text-gray-600 mb-6">Please select your role to continue:</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <button id="select-farmer-role" class="flex flex-col items-center justify-center p-6 bg-green-100 rounded-xl shadow-sm hover:bg-green-200 transition-colors duration-200">
-                                <i class="fas fa-tractor text-4xl text-green-700 mb-3"></i>
-                                <span class="text-lg font-semibold text-gray-800">I'm a Farmer</span>
-                            </button>
-                            <button id="select-buyer-role" class="flex flex-col items-center justify-center p-6 bg-blue-100 rounded-xl shadow-sm hover:bg-blue-200 transition-colors duration-200">
-                                <i class="fas fa-shopping-bag text-4xl text-blue-700 mb-3"></i>
-                                <span class="text-lg font-semibold text-gray-800">I'm a Buyer</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Login Form -->
-                    <div id="login-form" class="hidden">
-                        <p class="text-center text-gray-600 mb-4">Log in to your account</p>
-                        <div id="auth-message-box" class="hidden p-3 rounded-md text-center text-sm mb-4"></div>
-                        <div class="mb-4">
-                            <label for="login-email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                            <input type="email" id="login-email" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="your@email.com">
-                        </div>
-                        <div class="mb-6 relative">
-                            <label for="login-password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                            <input type="password" id="login-password" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="••••••••">
-                            <span class="absolute inset-y-0 right-0 pr-3 flex items-center pt-8 text-gray-500 cursor-pointer" onclick="togglePasswordVisibility('login-password')">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </div>
-                        <button id="general-login-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full w-full transition-colors duration-200">Log In</button>
-                        <p class="text-center text-sm text-gray-600 mt-4">
-                            Don't have an account? <button id="show-signup-form" class="text-blue-600 hover:text-blue-800 font-semibold">Sign Up</button>
-                        </p>
-                        <p class="text-center text-sm mt-2">
-                            <a href="#" id="forgot-password-link" class="text-blue-600 hover:text-blue-800 font-semibold">Forgot Password?</a>
-                        </p>
-                    </div>
-
-                    <!-- Signup Form -->
-                    <div id="signup-form" class="hidden">
-                        <p class="text-center text-gray-600 mb-4">Create your account</p>
-                        <div class="mb-4">
-                            <label for="signup-email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                            <input type="email" id="signup-email" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="your@email.com">
-                        </div>
-                        <div class="mb-4 relative">
-                            <label for="signup-password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                            <input type="password" id="signup-password" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="••••••••">
-                            <span class="absolute inset-y-0 right-0 pr-3 flex items-center pt-8 text-gray-500 cursor-pointer" onclick="togglePasswordVisibility('signup-password')">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </div>
-                        <div class="mb-6 relative">
-                            <label for="confirm-password" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
-                            <input type="password" id="confirm-password" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="••••••••">
-                            <span class="absolute inset-y-0 right-0 pr-3 flex items-center pt-8 text-gray-500 cursor-pointer" onclick="togglePasswordVisibility('confirm-password')">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </div>
-                        <button id="general-signup-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full w-full transition-colors duration-200">Sign Up</button>
-                        <p class="text-center text-sm text-gray-600 mt-4">
-                            Already have an account? <button id="show-login-form" class="text-green-600 hover:text-green-800 font-semibold">Log In</button>
-                        </p>
-                    </div>
-
-                    <!-- RSBSA Login Form -->
-                    <div id="rsbsa-login-form" class="hidden">
-                        <p class="text-center text-gray-600 mb-4">Farmer RSBSA Login</p>
-                        <p class="text-center text-sm text-red-600 mb-4">
-                            For registered farmers only. Your RSBSA ID is required.
-                        </p>
-                        <div class="mb-4">
-                            <label for="rsbsa-id" class="block text-gray-700 text-sm font-bold mb-2">RSBSA ID</label>
-                            <input type="text" id="rsbsa-id" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="e.g., 11-024-03-0000-0000">
-                        </div>
-                        <button id="rsbsa-login-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full w-full transition-colors duration-200">Login with RSBSA</button>
-                        <p class="text-center text-sm mt-4">
-                            <a href="#" id="learn-more-rsbsa" class="text-blue-600 hover:text-blue-800 font-semibold">Learn more about RSBSA</a>
-                        </p>
-                        <p class="text-center text-sm text-gray-600 mt-2">
-                            <button id="back-to-role-selection-from-rsbsa" class="text-gray-500 hover:text-gray-700">Back to role selection</button>
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Checkout Process Container -->
-                <div id="checkout-process-container" class="hidden">
-                    <!-- Checkout Header -->
-                    <div id="checkout-header" class="flex items-center justify-between border-b pb-4 mb-4">
-                        <button id="cart-back-arrow" class="text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-arrow-left text-xl"></i>
-                        </button>
-                        <h1 class="text-xl font-bold text-gray-800">Your Cart</h1>
-                        <span id="items-count" class="text-gray-600 text-sm"></span>
-                    </div>
-
-                    <!-- Checkout Progress Steps -->
-                    <div class="flex justify-between items-center mb-6 text-sm text-gray-400 font-medium">
-                        <div id="cart-step" class="flex flex-col items-center text-green-600">
-                            <i class="fas fa-shopping-cart text-xl mb-1"></i>
-                            Cart
-                        </div>
-                        <div id="cart-address-line" class="flex-1 h-0.5 border-t border-gray-300 mx-2"></div>
-                        <div id="address-step" class="flex flex-col items-center">
-                            <i class="fas fa-map-marker-alt text-xl mb-1"></i>
-                            Address
-                        </div>
-                        <div id="address-summary-line" class="flex-1 h-0.5 border-t border-gray-300 mx-2"></div>
-                        <div id="summary-step" class="flex flex-col items-center">
-                            <i class="fas fa-clipboard-list text-xl mb-1"></i>
-                            Summary
-                        </div>
-                        <div id="summary-payment-line" class="flex-1 h-0.5 border-t border-gray-300 mx-2"></div>
-                        <div id="payment-step" class="flex flex-col items-center">
-                            <i class="fas fa-credit-card text-xl mb-1"></i>
-                            Payment
-                        </div>
-                    </div>
-
-                    <!-- Step 0: Cart Contents -->
-                    <div id="step-0-cart" class="step-content">
-                        <div id="cart-items-container" class="space-y-4 mb-6">
-                            <!-- Cart items will be rendered here by JavaScript -->
-                        </div>
-                        <div class="border-t border-gray-200 pt-4">
-                            <div class="flex justify-between text-gray-700 mb-2">
-                                <span>Subtotal</span>
-                                <span id="subtotal">₱ 0.00</span>
-                            </div>
-                            <div class="flex justify-between text-gray-700 mb-2">
-                                <span>Delivery Charges</span>
-                                <span id="shipping-cost">₱ 0.00</span>
-                            </div>
-                            <div class="flex justify-between font-bold text-lg text-gray-900">
-                                <span>Order Total</span>
-                                <span id="cart-total">₱ 0.00</span>
-                            </div>
-                        </div>
-                        <button class="continue-btn mt-6 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full w-full transition-colors duration-200">
-                            Continue to Address
-                        </button>
-                    </div>
-
-                    <!-- Step 1: Address Selection/Input -->
-                    <div id="step-1-address" class="step-content hidden">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4">Delivery Address</h2>
-                        <div class="space-y-4 mb-6">
-                            <!-- Example Address Card -->
-                            <div class="address-card relative p-4 border border-gray-200 rounded-xl shadow-sm cursor-pointer hover:border-green-300 transition-all duration-200 active bg-green-100 border-green-300" id="default-address">
-                                <h3 class="font-semibold text-gray-800">Home Address</h3>
-                                <p class="text-sm text-gray-600">123 Main St, Brgy. San Juan, City of Manila, 1000 Metro Manila</p>
-                                <p class="text-sm text-gray-600">Contact: +63 912 345 6789</p>
-                            </div>
-                            <!-- Add New Address Button -->
-                            <button class="w-full py-3 px-4 border border-dashed border-gray-300 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors duration-200">
-                                <i class="fas fa-plus mr-2"></i> Add New Address
-                            </button>
-                        </div>
-                        <div class="flex justify-between space-x-4">
-                            <button class="back-btn flex-1 py-3 px-4 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition-colors duration-200">
-                                Back to Cart
-                            </button>
-                            <button class="continue-btn flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full transition-colors duration-200">
-                                Continue to Summary
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Order Summary -->
-                    <div id="step-2-summary" class="step-content hidden">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4">Order Summary</h2>
-                        <div id="summary-items-container" class="space-y-4 mb-6 max-h-60 overflow-y-auto custom-scrollbar">
-                            <!-- Products will be dynamically loaded here from cartItems -->
-                        </div>
-                        <div class="mb-6">
-                            <h3 class="font-semibold text-gray-800 mb-2">Delivery Details</h3>
-                            <p class="text-sm text-gray-600 mb-1">Shipping Address: 123 Main St, Brgy. San Juan, City of Manila, 1000 Metro Manila</p>
-                            <p class="text-sm text-gray-600">Estimated Delivery: 2-3 business days</p>
-                        </div>
-                        <div class="border-t border-gray-200 pt-4">
-                            <div class="flex justify-between text-gray-700 mb-2">
-                                <span>Subtotal</span>
-                                <span id="summary-subtotal">₱ 0.00</span>
-                            </div>
-                            <div class="flex justify-between text-gray-700 mb-2">
-                                <span>Delivery Charges</span>
-                                <span id="summary-shipping-cost">₱ 0.00</span>
-                            </div>
-                            <div class="flex justify-between font-bold text-lg text-gray-900">
-                                <span>Order Total</span>
-                                <span id="summary-total">₱ 0.00</span>
-                            </div>
-                        </div>
-                        <div class="flex justify-between space-x-4 mt-6">
-                            <button class="back-btn flex-1 py-3 px-4 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition-colors duration-200">
-                                Back to Address
-                            </button>
-                            <button class="continue-btn flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full transition-colors duration-200">
-                                Proceed to Payment
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Payment -->
-                    <div id="step-3-payment" class="step-content hidden">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4">Payment Method</h2>
-                        <div class="space-y-4 mb-6">
-                            <!-- Cash on Delivery -->
-                            <div class="payment-option-card relative p-4 border border-gray-200 rounded-xl shadow-sm cursor-pointer hover:border-green-300 transition-all duration-200 active bg-green-100 border-green-300" data-payment-type="cod">
-                                <h3 class="font-semibold text-gray-800 flex items-center">
-                                    <i class="fas fa-money-bill-wave mr-3 text-2xl text-green-700"></i> Cash on Delivery (COD)
-                                </h3>
-                                <p class="text-sm text-gray-600">Pay when your order arrives at your doorstep.</p>
-                            </div>
-                            <!-- Online Payment (Dummy) -->
-                            <div class="payment-option-card relative p-4 border border-gray-200 rounded-xl shadow-sm cursor-pointer hover:border-green-300 transition-all duration-200" data-payment-type="online">
-                                <h3 class="font-semibold text-gray-800 flex items-center">
-                                    <i class="fas fa-credit-card mr-3 text-2xl text-blue-700"></i> Online Payment (Credit/Debit Card)
-                                </h3>
-                                <p class="text-sm text-gray-600">Secure payment via your preferred card. (Dummy)</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between space-x-4">
-                            <button class="back-btn flex-1 py-3 px-4 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition-colors duration-200">
-                                Back to Summary
-                            </button>
-                            <button class="checkout-btn flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-full transition-colors duration-200">
-                                Place Order
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Modal Container -->
+<div id="app-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-auto relative flex flex-col overflow-hidden">
+    <span id="modal-close-btn" class="absolute top-2 right-4 text-2xl cursor-pointer text-gray-400 hover:text-gray-700">&times;</span>
+    <div id="auth-forms-container" class="p-6 flex-grow overflow-y-auto hidden">
+      <!-- Role selection -->
+      <div id="role-selection" style="display:none;">
+        <h2 class="text-xl font-bold mb-4">Select your role</h2>
+        <button id="select-farmer-role" class="bg-green-600 text-white px-4 py-2 rounded mr-2">Farmer/Seller</button>
+        <button id="select-buyer-role" class="bg-blue-600 text-white px-4 py-2 rounded">Buyer</button>
+      </div>
+      <!-- Login form -->
+      <form id="login-form" style="display:none;">
+        <input type="text" placeholder="Name" class="w-full mb-2 p-2 border rounded" required>
+        <input type="email" placeholder="Email" class="w-full mb-2 p-2 border rounded" required>
+        <button type="button" id="general-login-btn" class="bg-green-600 text-white px-4 py-2 rounded w-full mb-2">Login</button>
+        <a href="#" id="show-signup-form" class="text-blue-600 text-sm">Sign up</a>
+      </form>
+      <!-- Signup form -->
+      <form id="signup-form" style="display:none;">
+        <input type="text" placeholder="Name" class="w-full mb-2 p-2 border rounded" required>
+        <input type="email" placeholder="Email" class="w-full mb-2 p-2 border rounded" required>
+        <button type="button" id="general-signup-btn" class="bg-blue-600 text-white px-4 py-2 rounded w-full mb-2">Sign up</button>
+        <a href="#" id="show-login-form" class="text-green-600 text-sm">Already have an account?</a>
+      </form>
     </div>
+    <!-- Checkout process container (hidden by default) -->
+    <div id="checkout-process-container" class="hidden"></div>
+  </div>
+</div>
 
     <!-- The global script.js should be loaded at the end of the body -->
     <script src="script.js"></script>
-
+    <script src="marketplacePage.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', attachMarketplaceProductListeners);
+    </script>
 </body>
 </html>
