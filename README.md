@@ -43,28 +43,6 @@ This system features several dynamically loaded pages and interactive modal inte
 -   **FontAwesome:** For rich iconography.
 -   **Placeholder.co:** For dynamic image placeholders during development.
 
-## Project Structure
-
-AniMo_Assessment/
-├── css/
-│   ├── ... (individual page CSS files)
-│   └── global.css            # Global/base styles
-├── pages/
-│   ├── about.html
-│   ├── animoServicesPage.html
-│   ├── governmentUpdatePage.html
-│   ├── home.html
-│   ├── learningHubPage.html
-│   ├── loan.html
-│   ├── MarketplacePage.html
-│   ├── myActivityPage.html  
-│   ├── profilePage.html
-│   ├── sell.html
-│   └── weather.html
-├── images/                   # (Optional: for static image assets)
-├── index.html                # The main entry point of the application
-└── script.js                 # The global JavaScript file handling all application logic
-
 ## Getting Started
 
 To get a local copy of this project up and running, follow these simple steps.
